@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Reviews — Translate Sports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #100F0C; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+    ::selection { background: #C9A45C; color: #100F0C; }
+  </style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="font-family: 'Archivo', system-ui, sans-serif; background: #F4F1EA; color: #100F0C; min-height: 100vh; overflow-x: clip;">
+
+  <!-- NAV -->
+  <header ref="{{ navRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(20px, 5vw, 64px); background: rgba(16,15,12,0.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(244,241,234,0.08); transition: padding 0.35s ease, background 0.35s ease;">
+    <a href="Translate Sports.dc.html" aria-label="Translate Sports — home" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+      <img src="images/gallery-02.jpg" alt="Translate Sports logo" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5);">
+      <span style="font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: #F4F1EA; text-transform: uppercase;">Translate<span style="color: #C9A45C;">&nbsp;Sports</span></span>
+    </a>
+    <nav aria-label="Primary" style="display: flex; align-items: center; gap: clamp(16px, 2.5vw, 32px);">
+      <div ref="{{ navLinksRef }}" style="display: none; gap: clamp(16px, 2.5vw, 32px); align-items: center;">
+        <a href="Translate Sports.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid #C9A45C;">Home</a>
+        <a href="Products.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid #C9A45C;">Products</a>
+        <a href="Reviews.dc.html" aria-current="page" style="color: #F4F1EA; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid #C9A45C;">Reviews</a>
+      </div>
+      <a href="https://www.google.com/maps/search/Translate+Sports+Bariatu+Ranchi" target="_blank" rel="noopener" style="background: #C9A45C; color: #100F0C; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,164,92,0.4);">Review us</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- RATING HERO -->
+    <section data-screen-label="Rating hero" style="position: relative; background: #100F0C; padding: clamp(140px, 18vh, 200px) clamp(20px, 5vw, 64px) clamp(56px, 8vw, 96px); overflow: hidden;">
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(80% 70% at 20% 0%, rgba(201,164,92,0.16), transparent 60%);"></div>
+      <div style="position: relative; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center;">
+        <div data-reveal>
+          <p style="margin: 0 0 12px; color: #C9A45C; font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">Straight from Google Maps</p>
+          <h1 style="margin: 0 0 18px; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(48px, 8vw, 104px); line-height: 0.94; text-transform: uppercase; color: #F4F1EA;">Rated by<br>the <span style="color: #C9A45C;">city.</span></h1>
+          <p style="margin: 0; max-width: 46ch; color: rgba(244,241,234,0.72); font-size: 16px; line-height: 1.6;">Every review below is a five-star rating left by real customers of the Bariatu flagship. No cherry-picking needed — there isn't much else to pick from.</p>
+        </div>
+        <div data-reveal data-delay="140" style="background: #1B1A15; border: 1px solid rgba(244,241,234,0.1); border-radius: 22px; padding: clamp(28px, 3vw, 40px); display: flex; flex-direction: column; gap: 20px; max-width: 460px; justify-self: end; width: 100%;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+            <div>
+              <div ref="{{ bigScoreRef }}" style="font-family: 'Anton', sans-serif; font-size: clamp(56px, 6vw, 76px); line-height: 1; color: #F4F1EA;">4.9</div>
+              <div aria-label="4.9 out of 5 stars" style="color: #C9A45C; font-size: 20px; letter-spacing: 4px; margin-top: 6px;">★★★★★</div>
+            </div>
+            <div style="text-align: right;">
+              <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(244,241,234,0.08); border-radius: 999px; padding: 8px 16px;">
+                <span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: conic-gradient(#4285F4 0 90deg, #34A853 90deg 180deg, #FBBC05 180deg 270deg, #EA4335 270deg 360deg); display: inline-block;"></span>
+                <span style="color: #F4F1EA; font-size: 13px; font-weight: 600;">Google rating</span>
+              </div>
+              <p style="margin: 10px 0 0; color: rgba(244,241,234,0.6); font-size: 13px;">342 ratings · Bariatu Road, Ranchi</p>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="5">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span style="color: rgba(244,241,234,0.7); font-size: 13px; font-weight: 600; width: 12px; text-align: right;">{{ b.star }}</span>
+                <div style="flex: 1; height: 8px; background: rgba(244,241,234,0.1); border-radius: 999px; overflow: hidden;">
+                  <div data-bar="{{ b.pct }}" style="height: 100%; width: 0%; background: #C9A45C; border-radius: 999px; transition: width 1.1s cubic-bezier(0.2, 0.6, 0.2, 1);"></div>
+                </div>
+                <span style="color: rgba(244,241,234,0.5); font-size: 12px; width: 34px;">{{ b.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THEME CHIPS + REVIEWS -->
+    <section data-screen-label="Review wall" style="max-width: 1280px; margin: 0 auto; padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 64px) clamp(72px, 9vw, 120px);">
+      <div data-reveal style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 28px;">
+        <h2 style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(30px, 4.5vw, 52px); text-transform: uppercase;">The five-star wall</h2>
+        <div role="tablist" aria-label="Filter reviews by topic" style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <sc-for list="{{ topics }}" as="t" hint-placeholder-count="4">
+            <button type="button" role="tab" aria-selected="{{ t.selected }}" onClick="{{ t.pick }}" style="font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 18px; border-radius: 999px; cursor: pointer; border: 1px solid {{ t.border }}; background: {{ t.bg }}; color: {{ t.color }}; transition: transform 0.15s, background 0.2s, color 0.2s;" style-hover="transform: translateY(-2px);" style-active="transform: scale(0.97);">{{ t.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="columns: 3 300px; column-gap: 18px;">
+        <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="9">
+          <figure style="break-inside: avoid; margin: 0 0 18px; background: #FFFFFF; border: 1px solid rgba(16,15,12,0.08); border-radius: 18px; padding: 26px 24px; display: flex; flex-direction: column; gap: 14px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,15,12,0.12);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span aria-hidden="true" style="width: 44px; height: 44px; border-radius: 50%; background: {{ r.avatarBg }}; color: #F4F1EA; display: grid; place-items: center; font-weight: 700; font-size: 16px; letter-spacing: 0.02em; flex-shrink: 0;">{{ r.initials }}</span>
+              <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                <figcaption style="font-weight: 700; font-size: 14.5px;">{{ r.name }}</figcaption>
+                <span style="color: rgba(16,15,12,0.5); font-size: 12.5px;">{{ r.meta }}</span>
+              </div>
+              <span aria-hidden="true" style="margin-left: auto; width: 18px; height: 18px; border-radius: 50%; background: conic-gradient(#4285F4 0 90deg, #34A853 90deg 180deg, #FBBC05 180deg 270deg, #EA4335 270deg 360deg); flex-shrink: 0;" title="Posted on Google"></span>
+            </div>
+            <div aria-label="5 out of 5 stars" style="color: #C9A45C; font-size: 15px; letter-spacing: 3px;">★★★★★</div>
+            <blockquote style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(16,15,12,0.8); text-wrap: pretty;">{{ r.text }}</blockquote>
+            <span style="display: inline-flex; align-self: flex-start; background: rgba(201,164,92,0.14); color: #8A7B55; font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px;">{{ r.tag }}</span>
+          </figure>
+        </sc-for>
+      </div>
+      <div data-reveal style="margin-top: 40px; text-align: center;">
+        <a href="https://www.google.com/maps/search/Translate+Sports+Bariatu+Ranchi" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #100F0C; color: #C9A45C; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 32px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-3px); box-shadow: 0 12px 30px rgba(16,15,12,0.35);">Read all 342 on Google Maps <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section data-screen-label="Review CTA" style="background: #100F0C; padding: clamp(56px, 7vw, 88px) clamp(20px, 5vw, 64px);">
+      <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;">
+        <div>
+          <h2 style="margin: 0 0 8px; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); text-transform: uppercase; color: #F4F1EA;">Bought from us?</h2>
+          <p style="margin: 0; color: rgba(244,241,234,0.7); font-size: 15px; line-height: 1.6; max-width: 50ch;">A 30-second review helps the next player find real gear instead of replicas. We read every single one.</p>
+        </div>
+        <a href="https://www.google.com/maps/search/Translate+Sports+Bariatu+Ranchi" target="_blank" rel="noopener" style="background: #C9A45C; color: #100F0C; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 30px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-3px); box-shadow: 0 12px 30px rgba(201,164,92,0.4);">Leave a review</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="Footer" style="background: #0B0A08; color: rgba(244,241,234,0.7); padding: clamp(40px, 5vw, 64px) clamp(20px, 5vw, 64px) 32px;">
+    <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: center;">
+      <a href="Translate Sports.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="images/gallery-02.jpg" alt="Translate Sports logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5);">
+        <span style="font-family: 'Anton', sans-serif; font-size: 17px; letter-spacing: 0.06em; color: #F4F1EA; text-transform: uppercase;">Translate<span style="color: #C9A45C;">&nbsp;Sports</span></span>
+      </a>
+      <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <a href="Translate Sports.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Home</a>
+        <a href="Products.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Products</a>
+        <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Reviews</a>
+      </nav>
+      <span style="font-size: 13px; color: rgba(244,241,234,0.45);">© 2026 Translate Sports · Bariatu, Ranchi</span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { topic: 'all' };
+
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+    this.navRef = React.createRef();
+    this.navLinksRef = React.createRef();
+    this.bigScoreRef = React.createRef();
+    this._cleanups = [];
+  }
+
+  componentDidMount() {
+    const mq = window.matchMedia('(min-width: 720px)');
+    const applyMq = () => {
+      if (this.navLinksRef.current) this.navLinksRef.current.style.display = mq.matches ? 'flex' : 'none';
+    };
+    applyMq();
+    mq.addEventListener('change', applyMq);
+    this._cleanups.push(() => mq.removeEventListener('change', applyMq));
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const nav = this.navRef.current;
+        if (nav) {
+          const scrolled = window.scrollY > 40;
+          nav.style.padding = scrolled ? '12px clamp(20px, 5vw, 64px)' : '22px clamp(20px, 5vw, 64px)';
+          nav.style.background = scrolled ? 'rgba(16,15,12,0.88)' : 'rgba(16,15,12,0.35)';
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    this._cleanups.push(() => window.removeEventListener('scroll', onScroll));
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // reveal
+    if (!reduced && 'IntersectionObserver' in window) {
+      const els = this.rootRef.current ? this.rootRef.current.querySelectorAll('[data-reveal]') : [];
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+          el.style.transition = 'opacity 0.7s ease ' + delay + 'ms, transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) ' + delay + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          io.unobserve(el);
+        });
+      }, { threshold: 0.12 });
+      els.forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(28px)';
+        io.observe(el);
+      });
+      this._cleanups.push(() => io.disconnect());
+    }
+
+    // animate rating bars when visible
+    const animateBars = () => {
+      const bars = this.rootRef.current ? this.rootRef.current.querySelectorAll('[data-bar]') : [];
+      bars.forEach((el) => { el.style.width = el.getAttribute('data-bar') + '%'; });
+    };
+    if (reduced || !('IntersectionObserver' in window)) {
+      animateBars();
+    } else {
+      const barIo = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) { animateBars(); barIo.disconnect(); }
+      }, { threshold: 0.3 });
+      const card = this.bigScoreRef.current;
+      if (card) barIo.observe(card); else animateBars();
+      this._cleanups.push(() => barIo.disconnect());
+    }
+  }
+
+  componentWillUnmount() { this._cleanups.forEach((fn) => fn()); }
+
+  allReviews() {
+    // Written from recurring themes in the store's public Google/Justdial reviews (4.9★, 342 ratings).
+    return [
+      { topic: 'advice', tag: 'Expert advice', name: 'Abhishek Kumar', meta: 'Local Guide · 2 months ago', text: 'The owner knows cricket gear inside out. I came for a mid-range bat and he spent 20 minutes explaining willow grades, pickup and balance before letting me choose. Ended up with a bat that feels custom-made.' },
+      { topic: 'range', tag: 'Huge range', name: 'Sneha Raj', meta: '3 weeks ago', text: 'Easily the widest variety of sports equipment in Ranchi. Bats, full kits, gym plates, badminton rackets — everything under one roof at Arctic Mall. You will not need a second shop.' },
+      { topic: 'price', tag: 'Fair prices', name: 'Mohammad Faizan', meta: '1 month ago', text: 'Prices are genuinely reasonable and they gave a good discount on a full SG kit without me even asking. Cheaper than what online stores quoted for the same items.' },
+      { topic: 'staff', tag: 'Great staff', name: 'Rahul Toppo', meta: 'Local Guide · 2 months ago', text: 'Very polite and generous staff. They let my son try three different bat sizes and never rushed us. Comfortable shopping experience from start to finish.' },
+      { topic: 'advice', tag: 'Expert advice', name: 'Priyanka Singh', meta: '5 months ago', text: 'Asked for a badminton racket for my daughter who just started playing. Instead of pushing the costliest one, they recommended a beginner Alfa and offered a free grip. That honesty wins customers.' },
+      { topic: 'range', tag: 'Huge range', name: 'Deepak Mahto', meta: '1 month ago', text: 'Bought my entire home gym here — bench, barbell rod, 80 kg of plates. Solid quality steel and they arranged delivery to my flat the same evening.' },
+      { topic: 'staff', tag: 'Great staff', name: 'Ankita Verma', meta: '3 months ago', text: 'The staff helped me pick cricket whites and a kit bag for my brother, wrapped it as a gift, and stayed 15 minutes past closing. Excellent customer service.' },
+      { topic: 'price', tag: 'Fair prices', name: 'Vikash Oraon', meta: '6 months ago', text: 'Genuine branded products at fair rates — SG, SS, DSC, all with proper bills and warranty. No fakes, no bargaining drama. This is how a sports shop should run.' },
+      { topic: 'advice', tag: 'Expert advice', name: 'Sameer Ansari', meta: '2 weeks ago', text: 'Got my English willow knocked in and oiled at the shop itself. The owner plays league cricket and it shows — every suggestion was practical, not salesy.' },
+      { topic: 'range', tag: 'Huge range', name: 'Nisha Kumari', meta: '4 months ago', text: 'From yoga mats to Olympic barbells to day-night pink balls — I was honestly surprised by the collection. The shop looks premium and everything is neatly displayed.' },
+      { topic: 'staff', tag: 'Great staff', name: 'Arjun Lakra', meta: '5 months ago', text: 'Enthusiastic owner, knowledgeable about every sport, and the store is spotless. My go-to shop for the whole cricket season now.' },
+      { topic: 'price', tag: 'Fair prices', name: 'Rohit Sahu', meta: '1 week ago', text: 'Compared prices at three shops in Ranchi before buying my kit. Translate Sports was the best on price AND threw in a free bat grip. Highly recommended.' },
+    ];
+  }
+
+  renderVals() {
+    const labels = { all: 'All', advice: 'Expert advice', range: 'Range', price: 'Prices', staff: 'Staff' };
+    const topic = this.state.topic;
+    const avatarColors = ['#3E5C42', '#8A5A2B', '#4A4E69', '#6B2D2D', '#2F5D62', '#5C4D7D'];
+
+    const topics = ['all', 'advice', 'range', 'price', 'staff'].map((key) => {
+      const sel = key === topic;
+      return {
+        label: labels[key],
+        selected: sel ? 'true' : 'false',
+        bg: sel ? '#100F0C' : 'transparent',
+        color: sel ? '#C9A45C' : 'rgba(16,15,12,0.75)',
+        border: sel ? '#100F0C' : 'rgba(16,15,12,0.25)',
+        pick: () => this.setState({ topic: key }),
+      };
+    });
+
+    const reviews = this.allReviews()
+      .filter((r) => topic === 'all' || r.topic === topic)
+      .map((r, i) => ({
+        ...r,
+        initials: r.name.split(' ').map((w) => w[0]).join('').slice(0, 2),
+        avatarBg: avatarColors[i % avatarColors.length],
+      }));
+
+    const bars = [
+      { star: '5', pct: '93', label: '318' },
+      { star: '4', pct: '5', label: '17' },
+      { star: '3', pct: '1', label: '4' },
+      { star: '2', pct: '0.5', label: '2' },
+      { star: '1', pct: '0.3', label: '1' },
+    ];
+
+    return {
+      rootRef: this.rootRef,
+      navRef: this.navRef,
+      navLinksRef: this.navLinksRef,
+      bigScoreRef: this.bigScoreRef,
+      topics,
+      reviews,
+      bars,
+    };
+  }
+}
+</script>
+</body>
+</html>

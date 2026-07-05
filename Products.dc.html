@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>All Products — Translate Sports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #100F0C; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+    ::selection { background: #C9A45C; color: #100F0C; }
+    input::placeholder { color: rgba(16,15,12,0.4); }
+  </style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="font-family: 'Archivo', system-ui, sans-serif; background: #F4F1EA; color: #100F0C; min-height: 100vh; overflow-x: clip;">
+
+  <!-- NAV -->
+  <header ref="{{ navRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(20px, 5vw, 64px); background: rgba(16,15,12,0.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(244,241,234,0.08); transition: padding 0.35s ease, background 0.35s ease;">
+    <a href="Translate Sports.dc.html" aria-label="Translate Sports — home" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+      <img src="images/gallery-02.jpg" alt="Translate Sports logo" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5);">
+      <span style="font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: #F4F1EA; text-transform: uppercase;">Translate<span style="color: #C9A45C;">&nbsp;Sports</span></span>
+    </a>
+    <nav aria-label="Primary" style="display: flex; align-items: center; gap: clamp(16px, 2.5vw, 32px);">
+      <div ref="{{ navLinksRef }}" style="display: none; gap: clamp(16px, 2.5vw, 32px); align-items: center;">
+        <a href="Translate Sports.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid #C9A45C;">Home</a>
+        <a href="Products.dc.html" aria-current="page" style="color: #F4F1EA; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid #C9A45C;">Products</a>
+        <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid #C9A45C;">Reviews</a>
+      </div>
+      <span style="background: #C9A45C; color: #100F0C; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px;">Bag · {{ bagCount }}</span>
+    </nav>
+  </header>
+
+  <main>
+    <!-- PAGE HERO -->
+    <section data-screen-label="Products hero" style="position: relative; background: #100F0C; padding: clamp(140px, 18vh, 200px) clamp(20px, 5vw, 64px) clamp(48px, 6vw, 72px); overflow: hidden;">
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(80% 70% at 80% 0%, rgba(201,164,92,0.16), transparent 60%);"></div>
+      <div style="position: relative; max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px;">
+        <div data-reveal>
+          <p style="margin: 0 0 12px; color: #C9A45C; font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">The full wall</p>
+          <h1 style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(48px, 8vw, 110px); line-height: 0.94; text-transform: uppercase; color: #F4F1EA;">Every piece,<br>match <span style="color: #C9A45C;">ready.</span></h1>
+        </div>
+        <p data-reveal data-delay="120" style="margin: 0; max-width: 40ch; color: rgba(244,241,234,0.7); font-size: 16px; line-height: 1.6;">{{ resultLine }} Filter by arena, search by name — everything ships from the Bariatu flagship.</p>
+      </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <div ref="{{ filterBarRef }}" data-screen-label="Filter bar" style="position: sticky; top: 68px; z-index: 90; background: rgba(244,241,234,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(16,15,12,0.1);">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 14px clamp(20px, 5vw, 64px); display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+        <div role="tablist" aria-label="Filter by category" style="display: flex; flex-wrap: wrap; gap: 8px;">
+          <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+            <button type="button" role="tab" aria-selected="{{ f.selected }}" onClick="{{ f.pick }}" style="font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 10px 18px; border-radius: 999px; cursor: pointer; border: 1px solid {{ f.border }}; background: {{ f.bg }}; color: {{ f.color }}; transition: transform 0.15s, background 0.2s, color 0.2s;" style-hover="transform: translateY(-2px);" style-active="transform: scale(0.97);">{{ f.label }}</button>
+          </sc-for>
+        </div>
+        <input type="search" value="{{ query }}" onChange="{{ setQuery }}" placeholder="Search gear…" aria-label="Search products" style="margin-left: auto; flex: 0 1 220px; min-width: 140px; background: #FFFFFF; border: 1px solid rgba(16,15,12,0.15); color: #100F0C; font-family: 'Archivo', sans-serif; font-size: 14px; padding: 10px 18px; border-radius: 999px; outline: none; transition: border-color 0.2s;" style-focus="border-color: #C9A45C;">
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <section data-screen-label="Product grid" style="max-width: 1280px; margin: 0 auto; padding: clamp(32px, 4vw, 56px) clamp(20px, 5vw, 64px) clamp(72px, 9vw, 120px);">
+      <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 18px;">
+          <sc-for list="{{ visible }}" as="p" hint-placeholder-count="12">
+            <article style="background: #FFFFFF; border: 1px solid rgba(16,15,12,0.08); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;" style-hover="transform: translateY(-8px); box-shadow: 0 24px 48px rgba(16,15,12,0.16); border-color: rgba(201,164,92,0.6);">
+              <div style="position: relative; aspect-ratio: 1 / 1; background: #F4F1EA; overflow: hidden;">
+                <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);" style-hover="transform: scale(1.06);">
+                <span style="position: absolute; top: 12px; left: 12px; background: rgba(16,15,12,0.85); color: #C9A45C; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px;">{{ p.catLabel }}</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; flex: 1;">
+                <h2 style="margin: 0; font-size: 16px; font-weight: 600; line-height: 1.35;">{{ p.name }}</h2>
+                <p style="margin: 0; color: rgba(16,15,12,0.55); font-size: 13px;">{{ p.spec }}</p>
+                <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px;">
+                  <span style="font-size: 18px; font-weight: 700; letter-spacing: 0.02em;">{{ p.price }}</span>
+                  <button type="button" onClick="{{ p.add }}" aria-label="{{ p.addLabel }}" style="background: transparent; border: 1px solid rgba(16,15,12,0.3); color: #100F0C; font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.15s;" style-hover="background: #100F0C; color: #C9A45C; border-color: #100F0C; transform: scale(1.05);" style-active="transform: scale(0.97);">Add</button>
+                </div>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align: center; padding: 80px 20px; display: flex; flex-direction: column; gap: 12px; align-items: center;">
+          <p style="margin: 0; font-family: 'Anton', sans-serif; font-size: 28px; text-transform: uppercase; color: rgba(16,15,12,0.7);">Nothing on that shelf</p>
+          <p style="margin: 0; color: rgba(16,15,12,0.55); font-size: 15px;">Try a different search or category.</p>
+          <button type="button" onClick="{{ clearAll }}" style="margin-top: 8px; background: #100F0C; border: none; color: #C9A45C; font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 24px; border-radius: 999px; cursor: pointer;">Clear filters</button>
+        </div>
+      </sc-if>
+    </section>
+
+    <!-- HELP STRIP -->
+    <section data-screen-label="Help strip" style="background: #100F0C; padding: clamp(56px, 7vw, 88px) clamp(20px, 5vw, 64px);">
+      <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;">
+        <div>
+          <h2 style="margin: 0 0 8px; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(28px, 4vw, 44px); text-transform: uppercase; color: #F4F1EA;">Not sure what fits?</h2>
+          <p style="margin: 0; color: rgba(244,241,234,0.7); font-size: 15px; line-height: 1.6; max-width: 50ch;">Walk in for a free bat knock-in, grip fitting or racket restring — or message us and we'll pick for you.</p>
+        </div>
+        <a href="Translate Sports.dc.html#newsletter" style="background: #C9A45C; color: #100F0C; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 30px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-3px); box-shadow: 0 12px 30px rgba(201,164,92,0.4);">Talk to the floor</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer data-screen-label="Footer" style="background: #0B0A08; color: rgba(244,241,234,0.7); padding: clamp(40px, 5vw, 64px) clamp(20px, 5vw, 64px) 32px;">
+    <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; align-items: center;">
+      <a href="Translate Sports.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="images/gallery-02.jpg" alt="Translate Sports logo" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5);">
+        <span style="font-family: 'Anton', sans-serif; font-size: 17px; letter-spacing: 0.06em; color: #F4F1EA; text-transform: uppercase;">Translate<span style="color: #C9A45C;">&nbsp;Sports</span></span>
+      </a>
+      <nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 20px;">
+        <a href="Translate Sports.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Home</a>
+        <a href="Products.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Products</a>
+        <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Reviews</a>
+      </nav>
+      <span style="font-size: 13px; color: rgba(244,241,234,0.45);">© 2026 Translate Sports · Bariatu, Ranchi</span>
+    </div>
+  </footer>
+
+  <!-- toast -->
+  <div ref="{{ toastRef }}" role="status" aria-live="polite" style="position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 80px); z-index: 200; background: #100F0C; color: #F4F1EA; border: 1px solid rgba(201,164,92,0.6); border-radius: 999px; padding: 14px 26px; font-size: 14px; font-weight: 600; letter-spacing: 0.03em; opacity: 0; transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s; pointer-events: none; box-shadow: 0 16px 40px rgba(0,0,0,0.4);">Added to bag</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { cat: 'all', query: '', bag: 0 };
+
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+    this.navRef = React.createRef();
+    this.navLinksRef = React.createRef();
+    this.filterBarRef = React.createRef();
+    this.toastRef = React.createRef();
+    this._cleanups = [];
+    this._toastTimer = null;
+  }
+
+  componentDidMount() {
+    const mq = window.matchMedia('(min-width: 720px)');
+    const applyMq = () => {
+      if (this.navLinksRef.current) this.navLinksRef.current.style.display = mq.matches ? 'flex' : 'none';
+    };
+    applyMq();
+    mq.addEventListener('change', applyMq);
+    this._cleanups.push(() => mq.removeEventListener('change', applyMq));
+
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const y = window.scrollY;
+        const nav = this.navRef.current;
+        if (nav) {
+          const scrolled = y > 40;
+          nav.style.padding = scrolled ? '12px clamp(20px, 5vw, 64px)' : '22px clamp(20px, 5vw, 64px)';
+          nav.style.background = scrolled ? 'rgba(16,15,12,0.88)' : 'rgba(16,15,12,0.35)';
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    this._cleanups.push(() => window.removeEventListener('scroll', onScroll));
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced && 'IntersectionObserver' in window) {
+      const els = this.rootRef.current ? this.rootRef.current.querySelectorAll('[data-reveal]') : [];
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+          el.style.transition = 'opacity 0.7s ease ' + delay + 'ms, transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) ' + delay + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          io.unobserve(el);
+        });
+      }, { threshold: 0.12 });
+      els.forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(28px)';
+        io.observe(el);
+      });
+      this._cleanups.push(() => io.disconnect());
+    }
+  }
+
+  componentWillUnmount() {
+    this._cleanups.forEach((fn) => fn());
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+  }
+
+  showToast(name) {
+    const t = this.toastRef.current;
+    if (!t) return;
+    t.textContent = name + ' — added to bag';
+    t.style.opacity = '1';
+    t.style.transform = 'translate(-50%, 0)';
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translate(-50%, 80px)';
+    }, 2200);
+  }
+
+  catalog() {
+    return [
+      { cat: 'cricket', name: 'SG Savage Xtreme — English Willow', spec: 'Grade 1 willow · Short handle', price: '₹18,499', img: 'images/product-bat-sg.jpg', alt: 'SG Savage Xtreme English willow cricket bat' },
+      { cat: 'cricket', name: 'Anglar Premium English Willow', spec: 'Handcrafted · Knocked-in ready', price: '₹12,999', img: 'images/product-bat-english.jpg', alt: 'Premium English willow cricket bat' },
+      { cat: 'cricket', name: 'SS Master 2000 — English Willow', spec: 'Full profile · Mid sweet spot', price: '₹14,250', img: 'images/product-bat-ss.jpg', alt: 'SS Master cricket bat' },
+      { cat: 'cricket', name: 'DSC Intense — Kashmir Willow', spec: 'Power profile · Toe guard', price: '₹4,899', img: 'images/product-bat-dsc.jpg', alt: 'DSC Intense cricket bat' },
+      { cat: 'cricket', name: 'Kashmir Willow Club Bat', spec: 'Season-ready · Size 5/6/SH', price: '₹2,650', img: 'images/product-bat-kashmir.jpg', alt: 'Kashmir willow cricket bat' },
+      { cat: 'cricket', name: 'Leather Match Ball — Red', spec: '4-piece · Alum-tanned', price: '₹899', img: 'images/product-ball-red.jpg', alt: 'Red leather cricket ball' },
+      { cat: 'cricket', name: 'Leather Match Ball — White', spec: '4-piece · Limited overs', price: '₹949', img: 'images/product-ball-white.jpg', alt: 'White leather cricket ball' },
+      { cat: 'cricket', name: 'Leather Match Ball — Pink', spec: '4-piece · Day-night spec', price: '₹999', img: 'images/product-ball-pink.jpg', alt: 'Pink leather cricket ball' },
+      { cat: 'cricket', name: 'Pro Batting Pads — White', spec: 'Lightweight · Ambidextrous', price: '₹2,499', img: 'images/product-pads.jpg', alt: 'White cricket batting pads' },
+      { cat: 'cricket', name: 'Batting Pads — Fluoro Yellow', spec: 'T20 colourway · Cane rods', price: '₹2,699', img: 'images/product-pads-yellow.jpg', alt: 'Yellow cricket batting pads' },
+      { cat: 'cricket', name: 'Wooden Match Stumps — Set of 3', spec: 'Seasoned wood · With bails', price: '₹1,450', img: 'images/product-stumps.jpg', alt: 'Wooden cricket stumps set' },
+      { cat: 'cricket', name: 'Bat Grip — Chevron', spec: '30 cm · 6 colours in store', price: '₹149', img: 'images/product-grips.jpg', alt: 'Fluoro yellow chevron bat grip' },
+      { cat: 'cricket', name: 'SG SmartPak Kit Bag', spec: 'Wheelie · Bat sleeve x2', price: '₹4,199', img: 'images/product-kit-bag.jpg', alt: 'SG SmartPak cricket kit bag' },
+      { cat: 'cricket', name: 'SS Elite Kit Bag', spec: 'Duffle · Black & green', price: '₹3,650', img: 'images/product-kitbag-ss.jpg', alt: 'SS Elite cricket kit bag' },
+      { cat: 'cricket', name: 'SG Full Cricket Kit — 7 Piece', spec: 'Adult · Bat to helmet', price: '₹9,999', img: 'images/product-kit-full.jpg', alt: 'SG seven-piece cricket kit' },
+      { cat: 'apparel', name: 'Cotton Cricket Whites — Set', spec: 'Shirt + trouser · S–XXL', price: '₹1,299', img: 'images/product-uniform.jpg', alt: 'White cotton cricket uniform' },
+      { cat: 'training', name: 'SS Training Cone & Ladder Set', spec: 'Agility drills · 12 cones', price: '₹1,799', img: 'images/product-training.jpg', alt: 'Cricket training equipment set' },
+      { cat: 'training', name: 'Rubber-Coated Dumbbell Set', spec: '2.5–25 kg · Hex profile', price: '₹6,999', img: 'images/product-dumbbells.jpg', alt: 'Rubber-coated dumbbell set' },
+      { cat: 'training', name: 'Hex Dumbbell — 10 kg pair', spec: 'Knurled steel handle', price: '₹2,450', img: 'images/product-hex-dumbbell.jpg', alt: 'Hexagonal 10 kg dumbbell' },
+      { cat: 'training', name: 'Olympic Barbell Rod — 5 ft', spec: '28 mm · 700 lb rated', price: '₹3,899', img: 'images/product-barbell.jpg', alt: 'Straight Olympic barbell rod' },
+      { cat: 'training', name: 'Steel Weight Plates — 10 kg', spec: 'Machined · 50 mm bore', price: '₹1,850', img: 'images/product-plates.jpg', alt: 'Stainless steel weight plates' },
+      { cat: 'training', name: 'Flat Weight Bench', spec: 'Mild steel · 300 kg cap', price: '₹5,499', img: 'images/product-bench.jpg', alt: 'Flat weight bench' },
+      { cat: 'training', name: 'Vertical Chest Press', spec: 'Commercial grade', price: '₹42,000', img: 'images/product-chest-press.jpg', alt: 'Vertical chest press machine' },
+      { cat: 'training', name: 'Vertical Dumbbell Rack', spec: 'Holds 5 pairs', price: '₹4,250', img: 'images/product-dumbbell-rack.jpg', alt: 'Vertical dumbbell rack' },
+      { cat: 'training', name: 'Yoga Mat — Ocean Blue', spec: '6 mm PVC · Non-slip', price: '₹649', img: 'images/product-yoga-mat.jpg', alt: 'Blue yoga mat' },
+      { cat: 'training', name: 'Yoga Mat — Brick Red', spec: '6 mm PVC · Non-slip', price: '₹649', img: 'images/product-yoga-red.jpg', alt: 'Red yoga mat' },
+      { cat: 'racquet', name: 'Alfa Carbonex Racket', spec: 'Carbon frame · Strung', price: '₹3,299', img: 'images/product-racket.jpg', alt: 'Alfa Carbonex badminton racket' },
+      { cat: 'racquet', name: 'Alfa Castle Racket', spec: 'Even balance · Beginner+', price: '₹1,499', img: 'images/product-racket-castle.jpg', alt: 'Alfa Castle badminton racket' },
+      { cat: 'racquet', name: 'Alfa Cyrano Racket', spec: 'Head-heavy · Attack play', price: '₹2,199', img: 'images/product-racket-cyrano.jpg', alt: 'Alfa Cyrano badminton racket' },
+      { cat: 'racquet', name: 'Alfa AX-1 Racket', spec: 'Stiff shaft · Tour spec', price: '₹4,599', img: 'images/product-racket-ax1.jpg', alt: 'Alfa AX-1 badminton racket' },
+    ];
+  }
+
+  renderVals() {
+    const labels = { all: 'All', cricket: 'Cricket', training: 'Strength & Training', racquet: 'Racquet', apparel: 'Apparel' };
+    const cat = this.state.cat;
+    const q = this.state.query.trim().toLowerCase();
+
+    const filters = ['all', 'cricket', 'training', 'racquet', 'apparel'].map((key) => {
+      const sel = key === cat;
+      return {
+        label: labels[key],
+        selected: sel ? 'true' : 'false',
+        bg: sel ? '#100F0C' : 'transparent',
+        color: sel ? '#C9A45C' : 'rgba(16,15,12,0.75)',
+        border: sel ? '#100F0C' : 'rgba(16,15,12,0.25)',
+        pick: () => this.setState({ cat: key }),
+      };
+    });
+
+    const all = this.catalog();
+    const visible = all
+      .filter((p) => (cat === 'all' || p.cat === cat))
+      .filter((p) => !q || (p.name + ' ' + p.spec).toLowerCase().includes(q))
+      .map((p) => ({
+        ...p,
+        catLabel: labels[p.cat],
+        addLabel: 'Add ' + p.name + ' to bag',
+        add: () => { this.setState((s) => ({ bag: s.bag + 1 })); this.showToast(p.name); },
+      }));
+
+    return {
+      rootRef: this.rootRef,
+      navRef: this.navRef,
+      navLinksRef: this.navLinksRef,
+      filterBarRef: this.filterBarRef,
+      toastRef: this.toastRef,
+      filters,
+      visible,
+      hasResults: visible.length > 0,
+      noResults: visible.length === 0,
+      resultLine: all.length + ' pieces on the wall right now.',
+      query: this.state.query,
+      setQuery: (e) => this.setState({ query: e.target.value }),
+      clearAll: () => this.setState({ cat: 'all', query: '' }),
+      bagCount: String(this.state.bag),
+    };
+  }
+}
+</script>
+</body>
+</html>

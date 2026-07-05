@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Translate Sports — Gear that keeps up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #100F0C; }
+    @keyframes ts-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes ts-heroZoom { from { transform: scale(1.02); } to { transform: scale(1.12); } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+    ::selection { background: #C9A45C; color: #100F0C; }
+    input::placeholder { color: rgba(244,241,234,0.45); }
+  </style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="font-family: 'Archivo', system-ui, sans-serif; background: #F4F1EA; color: #100F0C; min-height: 100vh; overflow-x: clip;">
+
+  <!-- ============ NAV ============ -->
+  <header ref="{{ navRef }}" style="position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px clamp(20px, 5vw, 64px); background: rgba(16,15,12,0.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(244,241,234,0.08); transition: padding 0.35s ease, background 0.35s ease;">
+    <a href="#home" aria-label="Translate Sports — home" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+      <img src="images/gallery-02.jpg" alt="Translate Sports logo" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5);">
+      <span style="font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: #F4F1EA; text-transform: uppercase;">Translate<span style="color: var(--accent, #C9A45C);">&nbsp;Sports</span></span>
+    </a>
+    <nav aria-label="Primary" style="display: flex; align-items: center; gap: clamp(16px, 2.5vw, 32px);">
+      <div style="display: none; gap: clamp(16px, 2.5vw, 32px); align-items: center;" class="ts-desktop-links" ref="{{ navLinksRef }}">
+        <a href="Translate Sports.dc.html" aria-current="page" style="color: #F4F1EA; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid var(--accent, #C9A45C);">Home</a>
+        <a href="Products.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid var(--accent, #C9A45C);">Products</a>
+        <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid var(--accent, #C9A45C);">Reviews</a>
+        <a href="#story" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid var(--accent, #C9A45C);">Story</a>
+      </div>
+      <a href="#newsletter" style="background: var(--accent, #C9A45C); color: #100F0C; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,164,92,0.4);">Join us</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="home" data-screen-label="Hero" style="position: relative; min-height: 100svh; display: flex; align-items: flex-end; background: #100F0C; overflow: hidden;">
+      <div ref="{{ heroBgRef }}" style="position: absolute; inset: 0;" aria-hidden="true">
+        <img src="images/gallery-01.jpg" alt="" style="width: 100%; height: 100%; object-fit: cover; animation: ts-heroZoom 22s ease-in-out infinite alternate;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,15,12,0.55) 0%, rgba(16,15,12,0.35) 40%, rgba(16,15,12,0.92) 100%);"></div>
+        <div style="position: absolute; inset: 0; background: radial-gradient(90% 60% at 70% 20%, rgba(201,164,92,0.14), transparent 60%);"></div>
+      </div>
+      <div style="position: relative; z-index: 2; width: 100%; max-width: 1280px; margin: 0 auto; padding: 160px clamp(20px, 5vw, 64px) clamp(56px, 9vh, 110px); display: flex; flex-direction: column; gap: 28px;">
+        <p data-reveal data-delay="0" style="margin: 0; color: var(--accent, #C9A45C); font-size: 14px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">Bariatu · Ranchi — Est. flagship</p>
+        <h1 data-reveal data-delay="80" style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(56px, 10.5vw, 148px); line-height: 0.94; letter-spacing: 0.005em; text-transform: uppercase; color: #F4F1EA; text-wrap: balance;">Gear that<br>keeps <span style="color: var(--accent, #C9A45C);">up.</span></h1>
+        <p data-reveal data-delay="160" style="margin: 0; max-width: 52ch; color: rgba(244,241,234,0.78); font-size: clamp(16px, 1.6vw, 19px); line-height: 1.6; text-wrap: pretty;">Match-grade cricket, strength and court equipment — hand-picked from the brands the pros actually play. Walk in, gear up, play harder.</p>
+        <div data-reveal data-delay="240" style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center;">
+          <a href="#products" style="display: inline-flex; align-items: center; gap: 10px; background: var(--accent, #C9A45C); color: #100F0C; text-decoration: none; font-weight: 700; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; padding: 18px 34px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-3px); box-shadow: 0 14px 34px rgba(201,164,92,0.45);">Shop the collection <span aria-hidden="true" style="font-size: 18px; line-height: 1;">→</span></a>
+          <a href="#categories" style="display: inline-flex; align-items: center; gap: 10px; color: #F4F1EA; text-decoration: none; font-weight: 600; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; padding: 18px 30px; border: 1px solid rgba(244,241,234,0.35); border-radius: 999px; transition: border-color 0.2s, background 0.2s;" style-hover="border-color: #F4F1EA; background: rgba(244,241,234,0.08);">Browse categories</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <sc-if value="{{ showMarquee }}" hint-placeholder-val="{{ true }}">
+      <div aria-hidden="true" style="background: #100F0C; border-top: 1px solid rgba(244,241,234,0.08); border-bottom: 1px solid rgba(244,241,234,0.08); overflow: hidden; padding: 18px 0;">
+        <div style="display: flex; width: max-content; animation: ts-marquee 30s linear infinite;">
+          <div style="display: flex; gap: 48px; padding-right: 48px; font-family: 'Anton', sans-serif; font-size: clamp(22px, 3vw, 34px); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;">
+            <span style="color: #F4F1EA;">Cricket</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: transparent; -webkit-text-stroke: 1px rgba(244,241,234,0.55);">Strength</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: #F4F1EA;">Footwear</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: transparent; -webkit-text-stroke: 1px rgba(244,241,234,0.55);">Racquet</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: #F4F1EA;">Apparel</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: transparent; -webkit-text-stroke: 1px rgba(244,241,234,0.55);">Training</span><span style="color: var(--accent, #C9A45C);">✦</span>
+          </div>
+          <div style="display: flex; gap: 48px; padding-right: 48px; font-family: 'Anton', sans-serif; font-size: clamp(22px, 3vw, 34px); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;">
+            <span style="color: #F4F1EA;">Cricket</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: transparent; -webkit-text-stroke: 1px rgba(244,241,234,0.55);">Strength</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: #F4F1EA;">Footwear</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: transparent; -webkit-text-stroke: 1px rgba(244,241,234,0.55);">Racquet</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: #F4F1EA;">Apparel</span><span style="color: var(--accent, #C9A45C);">✦</span>
+            <span style="color: transparent; -webkit-text-stroke: 1px rgba(244,241,234,0.55);">Training</span><span style="color: var(--accent, #C9A45C);">✦</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ CATEGORIES ============ -->
+    <section id="categories" data-screen-label="Featured categories" style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 128px) clamp(20px, 5vw, 64px) clamp(48px, 6vw, 80px);">
+      <div data-reveal style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: clamp(32px, 4vw, 56px);">
+        <div>
+          <p style="margin: 0 0 10px; color: #8A7B55; font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">01 — Shop by sport</p>
+          <h2 style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(36px, 5.5vw, 68px); line-height: 1; text-transform: uppercase; letter-spacing: 0.005em;">Pick your arena</h2>
+        </div>
+        <p style="margin: 0; max-width: 36ch; color: rgba(16,15,12,0.6); font-size: 15px; line-height: 1.6;">Four floors of match-ready equipment, sized, weighed and knocked-in before it leaves the shop.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px;">
+        <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="4">
+          <a href="#products" data-reveal data-delay="{{ cat.delay }}" style="position: relative; display: block; border-radius: 18px; overflow: hidden; text-decoration: none; aspect-ratio: 4 / 5; background: #100F0C; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-8px); box-shadow: 0 24px 48px rgba(16,15,12,0.28);">
+            <img src="{{ cat.img }}" alt="{{ cat.alt }}" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.92; transition: transform 0.6s cubic-bezier(0.2, 0.6, 0.2, 1);" style-hover="transform: scale(1.07);">
+            <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(16,15,12,0.88) 100%); pointer-events: none;"></span>
+            <span style="position: absolute; left: 20px; right: 20px; bottom: 20px; pointer-events: none;">
+              <span style="display: block; font-family: 'Anton', sans-serif; font-size: clamp(24px, 2.4vw, 32px); text-transform: uppercase; color: #F4F1EA; letter-spacing: 0.02em;">{{ cat.name }}</span>
+              <span style="display: block; margin-top: 6px; color: var(--accent, #C9A45C); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;">{{ cat.count }} →</span>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ============ PRODUCT SPOTLIGHT ============ -->
+    <section id="products" data-screen-label="Product spotlight" style="background: #100F0C; padding: clamp(72px, 10vw, 128px) 0;">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px);">
+        <div data-reveal style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: clamp(32px, 4vw, 56px);">
+          <div>
+            <p style="margin: 0 0 10px; color: var(--accent, #C9A45C); font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">02 — Spotlight</p>
+            <h2 style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(36px, 5.5vw, 68px); line-height: 1; text-transform: uppercase; color: #F4F1EA;">This week's heat</h2>
+          </div>
+          <a href="Products.dc.html" style="color: var(--accent, #C9A45C); text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: border-color 0.2s;" style-hover="border-bottom: 2px solid var(--accent, #C9A45C);">View all 30 products →</a>
+        </div>
+      </div>
+      <div style="overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: rgba(201,164,92,0.6) transparent;">
+        <div style="display: grid; grid-auto-flow: column; grid-auto-columns: clamp(240px, 24vw, 300px); gap: 18px; padding: 4px clamp(20px, 5vw, 64px) 24px; width: max-content;">
+          <sc-for list="{{ products }}" as="p" hint-placeholder-count="6">
+            <article data-reveal data-delay="{{ p.delay }}" style="scroll-snap-align: start; background: #1B1A15; border: 1px solid rgba(244,241,234,0.08); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-8px); border-color: rgba(201,164,92,0.5); box-shadow: 0 24px 48px rgba(0,0,0,0.5);">
+              <div style="position: relative; aspect-ratio: 1 / 1; background: #F4F1EA; overflow: hidden;">
+                <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);" style-hover="transform: scale(1.06);">
+                <span style="position: absolute; top: 12px; left: 12px; background: rgba(16,15,12,0.85); color: var(--accent, #C9A45C); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px;">{{ p.tag }}</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px; padding: 18px 18px 20px; flex: 1;">
+                <h3 style="margin: 0; color: #F4F1EA; font-size: 16px; font-weight: 600; line-height: 1.35;">{{ p.name }}</h3>
+                <p style="margin: 0; color: rgba(244,241,234,0.55); font-size: 13px;">{{ p.spec }}</p>
+                <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px;">
+                  <span style="color: #F4F1EA; font-size: 18px; font-weight: 700; letter-spacing: 0.02em;">{{ p.price }}</span>
+                  <button type="button" onClick="{{ p.add }}" aria-label="{{ p.addLabel }}" style="background: transparent; border: 1px solid rgba(201,164,92,0.6); color: var(--accent, #C9A45C); font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s, transform 0.2s;" style-hover="background: var(--accent, #C9A45C); color: #100F0C; transform: scale(1.05);" style-active="transform: scale(0.97);">{{ p.btn }}</button>
+                </div>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BRAND STORY / VALUES ============ -->
+    <section id="story" data-screen-label="Brand story" style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 128px) clamp(20px, 5vw, 64px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(32px, 5vw, 72px); align-items: center;">
+        <div data-reveal>
+          <p style="margin: 0 0 10px; color: #8A7B55; font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">03 — Our story</p>
+          <h2 style="margin: 0 0 20px; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(34px, 4.8vw, 58px); line-height: 1.04; text-transform: uppercase; letter-spacing: 0.005em; text-wrap: balance;">We translate ambition into equipment.</h2>
+          <p style="margin: 0 0 14px; color: rgba(16,15,12,0.7); font-size: 16px; line-height: 1.7; text-wrap: pretty;">Translate Sports started as a single counter in Bariatu, Ranchi — run by players, for players. Today the flagship stocks everything from English-willow bats to Olympic barbells, and every piece is tested by people who actually use it on match day.</p>
+          <p style="margin: 0; color: rgba(16,15,12,0.7); font-size: 16px; line-height: 1.7; text-wrap: pretty;">No middlemen, no replicas, no shortcuts. If it's on our wall, it's earned its place.</p>
+        </div>
+        <div data-reveal data-delay="120" style="border-radius: 18px; overflow: hidden; aspect-ratio: 4 / 3; box-shadow: 0 32px 64px rgba(16,15,12,0.2);">
+          <img src="images/gallery-01.jpg" alt="Inside the Translate Sports flagship — walls of cricket bats and kit" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 18px; margin-top: clamp(40px, 6vw, 72px);">
+        <sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+          <div data-reveal data-delay="{{ v.delay }}" style="background: #FFFFFF; border: 1px solid rgba(16,15,12,0.08); border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,15,12,0.12);">
+            <span aria-hidden="true" style="width: 46px; height: 46px; border-radius: 12px; background: rgba(201,164,92,0.16); color: #8A7B55; display: grid; place-items: center; font-size: 20px; font-weight: 700;">{{ v.glyph }}</span>
+            <h3 style="margin: 0; font-size: 17px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;">{{ v.title }}</h3>
+            <p style="margin: 0; color: rgba(16,15,12,0.65); font-size: 14.5px; line-height: 1.6;">{{ v.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ============ STATS BAND ============ -->
+    <section data-screen-label="Stats band" aria-label="Store highlights" style="background: #100F0C; padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 64px);">
+      <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: clamp(24px, 4vw, 48px);">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <a href="{{ s.href }}" data-reveal data-delay="{{ s.delay }}" style="text-decoration: none; text-align: center; display: flex; flex-direction: column; gap: 8px; padding: 8px 0; border-radius: 14px; transition: transform 0.25s ease;" style-hover="transform: translateY(-4px);">
+            <span style="font-family: 'Anton', sans-serif; font-size: clamp(40px, 5vw, 64px); line-height: 1; color: var(--accent, #C9A45C);">{{ s.value }}</span>
+            <span style="color: rgba(244,241,234,0.7); font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;">{{ s.label }}</span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ============ STEP INSIDE GALLERY ============ -->
+    <section data-screen-label="Store gallery" style="max-width: 1280px; margin: 0 auto; padding: clamp(72px, 10vw, 128px) clamp(20px, 5vw, 64px);">
+      <div data-reveal style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: clamp(28px, 4vw, 48px);">
+        <div>
+          <p style="margin: 0 0 10px; color: #8A7B55; font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">04 — The flagship</p>
+          <h2 style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(36px, 5.5vw, 68px); line-height: 1; text-transform: uppercase;">Step inside</h2>
+        </div>
+        <p style="margin: 0; max-width: 34ch; color: rgba(16,15,12,0.6); font-size: 15px; line-height: 1.6;">Two floors at Arctic Mall, Bariatu Road. Hover a panel to look around.</p>
+      </div>
+      <div data-reveal data-delay="100" style="display: flex; gap: 10px; height: clamp(260px, 34vw, 420px);">
+        <sc-for list="{{ galleryPanels }}" as="g" hint-placeholder-count="5">
+          <div style="position: relative; flex: 1 1 0%; border-radius: 16px; overflow: hidden; background: #100F0C; transition: flex-grow 0.55s cubic-bezier(0.3, 0.7, 0.2, 1); cursor: crosshair; min-width: 0;" style-hover="flex-grow: 3.4;">
+            <img src="{{ g.img }}" alt="{{ g.alt }}" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center;">
+            <span aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(16,15,12,0.8) 100%); pointer-events: none;"></span>
+            <span style="position: absolute; left: 16px; bottom: 14px; right: 16px; color: #F4F1EA; font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none;">{{ g.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section id="reviews" data-screen-label="Testimonials" style="background: #EAE5D9; padding: clamp(72px, 10vw, 128px) 0;">
+      <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px);">
+        <div data-reveal style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: clamp(32px, 4vw, 56px);">
+          <div>
+            <p style="margin: 0 0 10px; color: #8A7B55; font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">05 — Word on the pitch</p>
+            <h2 style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(36px, 5.5vw, 68px); line-height: 1; text-transform: uppercase;">Players talk</h2>
+          </div>
+          <a href="Reviews.dc.html" style="color: #8A7B55; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: border-color 0.2s, color 0.2s;" style-hover="color: #100F0C; border-bottom: 2px solid var(--accent, #C9A45C);">All 342 Google reviews →</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 18px;">
+          <sc-for list="{{ quotes }}" as="q" hint-placeholder-count="3">
+            <figure data-reveal data-delay="{{ q.delay }}" style="margin: 0; background: #F4F1EA; border: 1px solid rgba(16,15,12,0.08); border-radius: 18px; padding: 32px 28px; display: flex; flex-direction: column; gap: 18px; transition: transform 0.3s ease, box-shadow 0.3s ease;" style-hover="transform: translateY(-6px); box-shadow: 0 18px 40px rgba(16,15,12,0.12);">
+              <span aria-hidden="true" style="font-family: 'Anton', sans-serif; font-size: 44px; line-height: 0.5; color: var(--accent, #C9A45C);">"</span>
+              <blockquote style="margin: 0; font-size: 17px; line-height: 1.6; color: rgba(16,15,12,0.85); font-style: italic; text-wrap: pretty;">{{ q.text }}</blockquote>
+              <figcaption style="margin-top: auto; display: flex; flex-direction: column; gap: 2px;">
+                <span style="font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase;">{{ q.name }}</span>
+                <span style="color: rgba(16,15,12,0.55); font-size: 13px;">{{ q.role }}</span>
+              </figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEWSLETTER ============ -->
+    <section id="newsletter" data-screen-label="Newsletter" style="background: #100F0C; padding: clamp(72px, 10vw, 128px) clamp(20px, 5vw, 64px);">
+      <div data-reveal style="max-width: 860px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; gap: 22px; align-items: center;">
+        <p style="margin: 0; color: var(--accent, #C9A45C); font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">06 — Stay match-fit</p>
+        <h2 style="margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(34px, 5.5vw, 64px); line-height: 1.02; text-transform: uppercase; color: #F4F1EA; text-wrap: balance;">New drops, first. <span style="color: var(--accent, #C9A45C);">No spam, ever.</span></h2>
+        <p style="margin: 0; max-width: 46ch; color: rgba(244,241,234,0.7); font-size: 16px; line-height: 1.6;">One short email when fresh stock lands — new-season bats, restocked plates, limited colourways.</p>
+        <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ subscribe }}" style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; width: 100%; max-width: 520px;">
+            <label for="ts-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;">Email address</label>
+            <input id="ts-email" ref="{{ emailRef }}" type="email" required placeholder="you@example.com" style="flex: 1 1 260px; min-width: 0; background: rgba(244,241,234,0.07); border: 1px solid rgba(244,241,234,0.2); color: #F4F1EA; font-family: 'Archivo', sans-serif; font-size: 15px; padding: 16px 22px; border-radius: 999px; outline: none; transition: border-color 0.2s;" style-focus="border-color: var(--accent, #C9A45C);">
+            <button type="submit" style="background: var(--accent, #C9A45C); border: none; color: #100F0C; font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 30px; border-radius: 999px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-2px); box-shadow: 0 10px 28px rgba(201,164,92,0.45);" style-active="transform: scale(0.98);">Sign up</button>
+          </form>
+        </sc-if>
+        <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+          <p role="status" style="margin: 0; color: var(--accent, #C9A45C); font-size: 16px; font-weight: 600; letter-spacing: 0.04em;">✓ You're on the list. See you at the next drop.</p>
+        </sc-if>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="background: #0B0A08; color: rgba(244,241,234,0.7); padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 64px) 36px;">
+    <div style="max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: clamp(32px, 4vw, 56px);">
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <a href="#home" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+          <img src="images/gallery-02.jpg" alt="Translate Sports logo" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5);">
+          <span style="font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: #F4F1EA; text-transform: uppercase;">Translate<span style="color: var(--accent, #C9A45C);">&nbsp;Sports</span></span>
+        </a>
+        <p style="margin: 0; font-size: 14px; line-height: 1.6; max-width: 32ch;">Authentic sports equipment, athlete-tested and match-ready. Play more, worry less.</p>
+      </div>
+      <nav aria-label="Footer" style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="color: #F4F1EA; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;">Explore</span>
+        <a href="Products.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">All products</a>
+        <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Google reviews</a>
+        <a href="#categories" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Shop by sport</a>
+        <a href="#story" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Our story</a>
+      </nav>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="color: #F4F1EA; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;">Visit</span>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7;">Booty Road, Bariatu<br>Ranchi, Jharkhand 834009</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.7;">Open daily · 10:00 – 21:00</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <span style="color: #F4F1EA; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;">Follow</span>
+        <a href="#home" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Instagram</a>
+        <a href="#home" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">YouTube</a>
+        <a href="#home" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">WhatsApp</a>
+      </div>
+    </div>
+    <div style="max-width: 1280px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(244,241,234,0.1); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: rgba(244,241,234,0.45);">
+      <span>© {{ year }} Translate Sports. All rights reserved.</span>
+      <span>Made for players, by players.</span>
+    </div>
+  </footer>
+
+  <!-- toast -->
+  <div ref="{{ toastRef }}" role="status" aria-live="polite" style="position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 80px); z-index: 200; background: #100F0C; color: #F4F1EA; border: 1px solid rgba(201,164,92,0.6); border-radius: 999px; padding: 14px 26px; font-size: 14px; font-weight: 600; letter-spacing: 0.03em; opacity: 0; transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s; pointer-events: none; box-shadow: 0 16px 40px rgba(0,0,0,0.4);">Added to bag</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;accentColor&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#C9A45C&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;#C9A45C&quot;, &quot;#E4572E&quot;, &quot;#2A9D8F&quot;, &quot;#D7263D&quot;], &quot;section&quot;: &quot;Brand&quot; },
+  &quot;showMarquee&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Sections&quot; }
+}">
+class Component extends DCLogic {
+  state = { subscribed: false };
+
+  constructor(props) {
+    super(props);
+    this.rootRef = React.createRef();
+    this.navRef = React.createRef();
+    this.navLinksRef = React.createRef();
+    this.heroBgRef = React.createRef();
+    this.toastRef = React.createRef();
+    this.emailRef = React.createRef();
+    this._cleanups = [];
+    this._toastTimer = null;
+  }
+
+  applyAccent() {
+    if (this.rootRef.current) {
+      this.rootRef.current.style.setProperty('--accent', this.props.accentColor ?? '#C9A45C');
+    }
+  }
+
+  componentDidMount() {
+    this.applyAccent();
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Desktop nav links: show at >= 720px
+    const mq = window.matchMedia('(min-width: 720px)');
+    const applyMq = () => {
+      if (this.navLinksRef.current) this.navLinksRef.current.style.display = mq.matches ? 'flex' : 'none';
+    };
+    applyMq();
+    mq.addEventListener('change', applyMq);
+    this._cleanups.push(() => mq.removeEventListener('change', applyMq));
+
+    // Sticky nav shrink/darken + hero parallax
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const y = window.scrollY;
+        const nav = this.navRef.current;
+        if (nav) {
+          const scrolled = y > 40;
+          nav.style.padding = scrolled ? '12px clamp(20px, 5vw, 64px)' : '22px clamp(20px, 5vw, 64px)';
+          nav.style.background = scrolled ? 'rgba(16,15,12,0.88)' : 'rgba(16,15,12,0.35)';
+        }
+        if (!reduced && this.heroBgRef.current) {
+          this.heroBgRef.current.style.transform = 'translateY(' + Math.min(y * 0.25, 320) + 'px)';
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    this._cleanups.push(() => window.removeEventListener('scroll', onScroll));
+
+    // Scroll-reveal (staggered) — skipped entirely when reduced motion is preferred
+    if (!reduced && 'IntersectionObserver' in window) {
+      const els = this.rootRef.current ? this.rootRef.current.querySelectorAll('[data-reveal]') : [];
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const delay = parseInt(el.getAttribute('data-delay') || '0', 10);
+          el.style.transition = 'opacity 0.7s ease ' + delay + 'ms, transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) ' + delay + 'ms';
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          io.unobserve(el);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(28px)';
+        io.observe(el);
+      });
+      this._cleanups.push(() => io.disconnect());
+    }
+  }
+
+  componentDidUpdate() { this.applyAccent(); }
+
+  componentWillUnmount() {
+    this._cleanups.forEach((fn) => fn());
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+  }
+
+  showToast(name) {
+    const t = this.toastRef.current;
+    if (!t) return;
+    t.textContent = name + ' — added to bag';
+    t.style.opacity = '1';
+    t.style.transform = 'translate(-50%, 0)';
+    if (this._toastTimer) clearTimeout(this._toastTimer);
+    this._toastTimer = setTimeout(() => {
+      t.style.opacity = '0';
+      t.style.transform = 'translate(-50%, 80px)';
+    }, 2200);
+  }
+
+  renderVals() {
+    const categories = [
+      { name: 'Cricket', count: '120+ items', img: 'images/gallery-01.jpg', alt: 'Wall of cricket bats and protective kit inside the store' },
+      { name: 'Footwear & Apparel', count: '80+ items', img: 'images/gallery-33.jpg', alt: 'Shoe wall with training footwear and apparel racks' },
+      { name: 'Strength & Training', count: '60+ items', img: 'images/product-dumbbells.jpg', alt: 'Rubber-coated dumbbell set on a rack' },
+      { name: 'Racquet & Court', count: '40+ items', img: 'images/product-racket.jpg', alt: 'Alfa Carbonex badminton racket' },
+    ].map((c, i) => ({ ...c, delay: String(i * 90) }));
+
+    const products = [
+      { name: 'SG Savage Xtreme — English Willow', spec: 'Grade 1 willow · Short handle', price: '₹18,499', tag: 'Best seller', img: 'images/product-bat-sg.jpg', alt: 'SG Savage Xtreme English willow cricket bat' },
+      { name: 'Anglar Premium English Willow', spec: 'Handcrafted · Knocked-in ready', price: '₹12,999', tag: 'New drop', img: 'images/product-bat-english.jpg', alt: 'Anglar premium English willow cricket bat' },
+      { name: 'Leather Match Ball — Red', spec: '4-piece · Alum-tanned', price: '₹899', tag: 'Match grade', img: 'images/product-ball-red.jpg', alt: 'Red leather cricket match ball' },
+      { name: 'Pro Batting Pads — White', spec: 'Lightweight · Ambidextrous', price: '₹2,499', tag: 'Protection', img: 'images/product-pads.jpg', alt: 'White cricket batting leg guards' },
+      { name: 'Rubber-Coated Dumbbell Set', spec: '2.5–25 kg · Hex profile', price: '₹6,999', tag: 'Training', img: 'images/product-dumbbells.jpg', alt: 'Rubber-coated hex dumbbell set' },
+      { name: 'Alfa Carbonex Racket', spec: 'Carbon frame · Strung', price: '₹3,299', tag: 'Court', img: 'images/product-racket.jpg', alt: 'Alfa Carbonex badminton racket' },
+    ].map((p, i) => ({
+      ...p,
+      delay: String((i % 4) * 70),
+      btn: 'Add',
+      addLabel: 'Add ' + p.name + ' to bag',
+      add: () => this.showToast(p.name),
+    }));
+
+    const values = [
+      { glyph: '✓', title: 'Authentic gear', body: 'Direct from SG, SS, DSC, Alfa and more — every item carries the maker\u2019s warranty. No greys, no fakes.' },
+      { glyph: '⚡', title: 'Fast shipping', body: 'Same-day dispatch across Ranchi, 2–4 days pan-India. Free above ₹1,999.' },
+      { glyph: '◎', title: 'Athlete-tested', body: 'Our floor staff play league cricket and lift on weekends. If it doesn\u2019t survive us, we don\u2019t sell it.' },
+    ].map((v, i) => ({ ...v, delay: String(i * 100) }));
+
+    const quotes = [
+      { text: 'They knocked my bat in, adjusted the grip twice and didn\u2019t charge a rupee extra. This is what a pro shop should feel like.', name: 'Aarav M.', role: 'Club opener, Ranchi District League' },
+      { text: 'Bought my whole home gym here — plates, bench, barbell. Better prices than online and the steel is genuinely solid.', name: 'Priya S.', role: 'Powerlifter' },
+      { text: 'The only store in town where staff actually play the sports they sell. Their racket advice fixed my smash.', name: 'Rohit K.', role: 'State-level badminton' },
+    ].map((q, i) => ({ ...q, delay: String(i * 100) }));
+
+    const stats = [
+      { value: '4.9★', label: 'Google rating', href: 'Reviews.dc.html' },
+      { value: '342', label: 'Reviews & counting', href: 'Reviews.dc.html' },
+      { value: '30+', label: 'Pieces in spotlight', href: 'Products.dc.html' },
+      { value: '4', label: 'Arenas covered', href: 'Products.dc.html' },
+    ].map((s, i) => ({ ...s, delay: String(i * 90) }));
+
+    const galleryPanels = [
+      { img: 'images/gallery-01.jpg', label: 'The bat wall', alt: 'Cricket bat wall inside Translate Sports' },
+      { img: 'images/gallery-08.jpg', label: 'Kits & bags', alt: 'Kit bags, balls and rackets on display' },
+      { img: 'images/gallery-12.jpg', label: 'The shoe wall', alt: 'Sports shoe wall display' },
+      { img: 'images/gallery-05.jpg', label: 'Apparel floor', alt: 'Apparel racks and trophies floor' },
+      { img: 'images/gallery-15.jpg', label: 'Fitting lounge', alt: 'Whites shelf and fitting lounge' },
+    ];
+
+    return {
+      rootRef: this.rootRef,
+      stats,
+      galleryPanels,
+      navRef: this.navRef,
+      navLinksRef: this.navLinksRef,
+      heroBgRef: this.heroBgRef,
+      toastRef: this.toastRef,
+      emailRef: this.emailRef,
+      categories,
+      products,
+      values,
+      quotes,
+      showMarquee: this.props.showMarquee ?? true,
+      subscribed: this.state.subscribed,
+      notSubscribed: !this.state.subscribed,
+      subscribe: (e) => { e.preventDefault(); this.setState({ subscribed: true }); },
+      year: '2026',
+    };
+  }
+}
+</script>
+</body>
+</html>
