@@ -219,8 +219,9 @@
 <script src="store.js"></script>
 <script>
 (function () {
-  var OWNER_EMAIL = 'sthitpragyasoham@gmail.com';
-  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + OWNER_EMAIL;
+  var OWNER_EMAIL = 'sthitpragyasoham@gmail.com';   // used only for the mailto: fallback below
+  // Masked FormSubmit token (keeps the owner email out of the public page source).
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/27746fe89eb721e506258414835977e6';
   var ADMIN_PASSCODE = 'translate';   // client-side gate only — keeps casual visitors out, not real security
   var GATE_KEY = 'ts_admin_ok';
 
