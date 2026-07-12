@@ -41,7 +41,7 @@
         <a href="Products.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid var(--accent, #C9A45C);">Products</a>
         <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid var(--accent, #C9A45C);">Reviews</a>
       </div>
-      <a href="#newsletter" style="background: var(--accent, #C9A45C); color: #100F0C; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,164,92,0.4);">Join us</a>
+      <a href="basket.html" aria-label="View your reservation basket" style="display: inline-flex; align-items: center; gap: 8px; background: var(--accent, #C9A45C); color: #100F0C; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,164,92,0.4);"><span aria-hidden="true" style="font-size:16px; line-height:1;">🧺</span> Basket · <span id="ts-bag-count">0</span></a>
     </nav>
   </header>
 
@@ -261,6 +261,8 @@
         <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Google reviews</a>
         <a href="#categories" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Shop by sport</a>
         <a href="#story" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Our story</a>
+        <a href="basket.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Reservation basket</a>
+        <a href="changes.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: var(--accent, #C9A45C);">Request a change</a>
       </nav>
       <div style="display: flex; flex-direction: column; gap: 10px;">
         <span style="color: #F4F1EA; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 4px;">Visit</span>
@@ -312,6 +314,14 @@ class Component extends DCLogic {
   componentDidMount() {
     this.applyAccent();
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Keep the nav basket counter in sync with the reservation basket in localStorage
+    this.syncBagCount();
+    const bagTimer = setInterval(() => this.syncBagCount(), 600);
+    this._cleanups.push(() => clearInterval(bagTimer));
+    const onStorage = () => this.syncBagCount();
+    window.addEventListener('storage', onStorage);
+    this._cleanups.push(() => window.removeEventListener('storage', onStorage));
 
     // Desktop nav links: show at >= 720px
     const mq = window.matchMedia('(min-width: 720px)');
@@ -388,6 +398,22 @@ class Component extends DCLogic {
     }, 2200);
   }
 
+  addToBag(p) {
+    try {
+      const bag = JSON.parse(localStorage.getItem('ts_basket') || '[]');
+      bag.push({ name: p.name, spec: p.spec || '', price: p.price || '', img: p.img || '' });
+      localStorage.setItem('ts_basket', JSON.stringify(bag));
+    } catch (e) {}
+    this.syncBagCount();
+    this.showToast(p.name);
+  }
+
+  syncBagCount() {
+    let n = 0;
+    try { n = JSON.parse(localStorage.getItem('ts_basket') || '[]').length; } catch (e) {}
+    document.querySelectorAll('#ts-bag-count').forEach((el) => { el.textContent = String(n); });
+  }
+
   renderVals() {
     const categories = [
       { name: 'Cricket', count: '120+ items', img: 'images/gallery-01.jpg', alt: 'Wall of cricket bats and protective kit inside the store' },
@@ -408,7 +434,7 @@ class Component extends DCLogic {
       delay: String((i % 4) * 70),
       btn: 'Add',
       addLabel: 'Add ' + p.name + ' to bag',
-      add: () => this.showToast(p.name),
+      add: () => this.addToBag(p),
     }));
 
     const values = [

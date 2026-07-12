@@ -39,7 +39,7 @@
         <a href="Products.dc.html" aria-current="page" style="color: #F4F1EA; text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid #C9A45C;">Products</a>
         <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s;" style-hover="color: #F4F1EA; border-bottom: 2px solid #C9A45C;">Reviews</a>
       </div>
-      <span style="background: #C9A45C; color: #100F0C; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px;">Bag · {{ bagCount }}</span>
+      <a href="basket.html" aria-label="View your reservation basket" style="display: inline-flex; align-items: center; gap: 8px; background: #C9A45C; color: #100F0C; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,164,92,0.4);"><span aria-hidden="true" style="font-size:16px; line-height:1;">🧺</span> Basket · <span id="ts-bag-count">{{ bagCount }}</span></a>
     </nav>
   </header>
 
@@ -122,6 +122,8 @@
         <a href="Translate Sports.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Home</a>
         <a href="Products.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Products</a>
         <a href="Reviews.dc.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Reviews</a>
+        <a href="basket.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Reservation basket</a>
+        <a href="changes.html" style="color: rgba(244,241,234,0.7); text-decoration: none; font-size: 14px; transition: color 0.2s;" style-hover="color: #C9A45C;">Request a change</a>
       </nav>
       <span style="font-size: 13px; color: rgba(244,241,234,0.45);">© 2026 Translate Sports · Bariatu, Ranchi</span>
     </div>
@@ -147,6 +149,14 @@ class Component extends DCLogic {
   }
 
   componentDidMount() {
+    // Keep the nav basket counter in sync with the reservation basket in localStorage
+    this.syncBagCount();
+    const bagTimer = setInterval(() => this.syncBagCount(), 600);
+    this._cleanups.push(() => clearInterval(bagTimer));
+    const onStorage = () => this.syncBagCount();
+    window.addEventListener('storage', onStorage);
+    this._cleanups.push(() => window.removeEventListener('storage', onStorage));
+
     const mq = window.matchMedia('(min-width: 720px)');
     const applyMq = () => {
       if (this.navLinksRef.current) this.navLinksRef.current.style.display = mq.matches ? 'flex' : 'none';
@@ -215,6 +225,22 @@ class Component extends DCLogic {
     }, 2200);
   }
 
+  addToBag(p) {
+    try {
+      const bag = JSON.parse(localStorage.getItem('ts_basket') || '[]');
+      bag.push({ name: p.name, spec: p.spec || '', price: p.price || '', img: p.img || '' });
+      localStorage.setItem('ts_basket', JSON.stringify(bag));
+    } catch (e) {}
+    this.syncBagCount();
+    this.showToast(p.name);
+  }
+
+  syncBagCount() {
+    let n = 0;
+    try { n = JSON.parse(localStorage.getItem('ts_basket') || '[]').length; } catch (e) {}
+    document.querySelectorAll('#ts-bag-count').forEach((el) => { el.textContent = String(n); });
+  }
+
   catalog() {
     return [
       { cat: 'cricket', name: 'SG Savage Xtreme — English Willow', spec: 'Grade 1 willow · Short handle', price: '₹18,499', img: 'images/product-bat-sg.jpg', alt: 'SG Savage Xtreme English willow cricket bat' },
@@ -275,7 +301,7 @@ class Component extends DCLogic {
         ...p,
         catLabel: labels[p.cat],
         addLabel: 'Add ' + p.name + ' to bag',
-        add: () => { this.setState((s) => ({ bag: s.bag + 1 })); this.showToast(p.name); },
+        add: () => this.addToBag(p),
       }));
 
     return {

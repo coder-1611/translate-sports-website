@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request a Change — Translate Sports</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root { --accent: #C9A45C; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #F4F1EA; color: #100F0C; font-family: 'Archivo', system-ui, sans-serif; min-height: 100vh; overflow-x: clip; }
+  ::selection { background: var(--accent); color: #100F0C; }
+
+  /* NAV */
+  header.ts-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px clamp(20px, 5vw, 64px); background: rgba(16,15,12,0.88); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(244,241,234,0.08); }
+  .ts-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .ts-brand img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5); }
+  .ts-brand span { font-family: 'Anton', sans-serif; font-size: 18px; letter-spacing: 0.06em; color: #F4F1EA; text-transform: uppercase; }
+  .ts-brand .acc { color: var(--accent); }
+  nav.ts-links { display: flex; align-items: center; gap: clamp(14px, 2.5vw, 32px); }
+  .ts-desklinks { display: none; gap: clamp(14px, 2.5vw, 32px); align-items: center; }
+  @media (min-width: 720px) { .ts-desklinks { display: flex; } }
+  .ts-desklinks a { color: rgba(244,241,234,0.85); text-decoration: none; font-size: 14px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 0; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .ts-desklinks a:hover { color: #F4F1EA; border-bottom-color: var(--accent); }
+  .ts-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #100F0C; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: 'Archivo', sans-serif; transition: transform 0.2s, box-shadow 0.2s; }
+  .ts-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,164,92,0.4); }
+
+  /* HERO */
+  .ts-hero { position: relative; background: #100F0C; padding: clamp(130px, 18vh, 190px) clamp(20px, 5vw, 64px) clamp(40px, 6vw, 64px); overflow: hidden; }
+  .ts-hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 70% at 80% 0%, rgba(201,164,92,0.16), transparent 60%); pointer-events: none; }
+  .ts-hero-inner { position: relative; max-width: 1280px; margin: 0 auto; }
+  .ts-eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; }
+  .ts-hero h1 { margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(44px, 8vw, 100px); line-height: 0.94; text-transform: uppercase; color: #F4F1EA; }
+  .ts-hero h1 .acc { color: var(--accent); }
+  .ts-note { margin: 22px 0 0; max-width: 68ch; color: rgba(244,241,234,0.8); font-size: clamp(15px,1.6vw,17px); line-height: 1.6; }
+
+  /* CONTROLS */
+  .ts-controls { max-width: 1280px; margin: 0 auto; padding: clamp(28px,4vw,44px) clamp(20px, 5vw, 64px) 0; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+  .ts-requester { flex: 1 1 320px; min-width: 0; }
+  .ts-requester label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(16,15,12,0.6); margin-bottom: 8px; }
+  .ts-requester input { width: 100%; background: #FFFFFF; border: 1px solid rgba(16,15,12,0.2); border-radius: 12px; padding: 12px 16px; font-family: 'Archivo', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; }
+  .ts-requester input:focus { border-color: var(--accent); }
+  .ts-addbtn { display: inline-flex; align-items: center; gap: 8px; background: #100F0C; color: var(--accent); border: none; font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 15px 26px; border-radius: 999px; cursor: pointer; transition: transform 0.2s; align-self: flex-end; }
+  .ts-addbtn:hover { transform: translateY(-2px); }
+
+  /* GRID */
+  main { max-width: 1280px; margin: 0 auto; padding: clamp(28px,4vw,44px) clamp(20px, 5vw, 64px) clamp(72px, 10vw, 120px); }
+  .ts-status { color: rgba(16,15,12,0.6); font-size: 14px; margin: 0 0 22px; }
+  .ts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 18px; }
+  .ts-card { background: #1B1A15; border: 1px solid rgba(244,241,234,0.08); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+  .ts-card .thumb { position: relative; aspect-ratio: 1 / 1; background: #F4F1EA; overflow: hidden; }
+  .ts-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .ts-card .cat { position: absolute; top: 12px; left: 12px; background: rgba(16,15,12,0.85); color: var(--accent); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
+  .ts-card .body { display: flex; flex-direction: column; gap: 6px; padding: 18px; flex: 1; }
+  .ts-card h3 { margin: 0; color: #F4F1EA; font-size: 16px; font-weight: 600; line-height: 1.35; }
+  .ts-card .spec { margin: 0; color: rgba(244,241,234,0.55); font-size: 13px; }
+  .ts-card .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; }
+  .ts-card .price { color: #F4F1EA; font-size: 18px; font-weight: 700; }
+  .ts-card .editbtn { background: transparent; border: 1px solid rgba(201,164,92,0.6); color: var(--accent); font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .ts-card .editbtn:hover { background: var(--accent); color: #100F0C; }
+
+  /* EDIT FORM (inside card) */
+  .ts-form { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(244,241,234,0.08); }
+  .ts-form .field { display: flex; flex-direction: column; gap: 5px; }
+  .ts-form label { color: rgba(244,241,234,0.65); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ts-form input, .ts-form textarea, .ts-form select { background: rgba(244,241,234,0.06); border: 1px solid rgba(244,241,234,0.18); color: #F4F1EA; font-family: 'Archivo', sans-serif; font-size: 14px; padding: 10px 12px; border-radius: 10px; outline: none; transition: border-color 0.2s; }
+  .ts-form input:focus, .ts-form textarea:focus, .ts-form select:focus { border-color: var(--accent); }
+  .ts-form .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .ts-form .save { flex: 1 1 auto; background: var(--accent); color: #100F0C; border: none; font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
+  .ts-form .cancel { background: transparent; color: rgba(244,241,234,0.7); border: 1px solid rgba(244,241,234,0.25); font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
+  .ts-form .remove { background: transparent; color: #E4726A; border: 1px solid rgba(228,114,106,0.5); font-family: 'Archivo', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 12px 18px; border-radius: 999px; cursor: pointer; }
+  .ts-form .remove:hover { background: rgba(228,114,106,0.15); }
+  .ts-form .msg { font-size: 13px; line-height: 1.5; padding: 8px 2px 0; }
+  .ts-form .msg.ok { color: var(--accent); }
+  .ts-form .msg.err { color: #E4726A; }
+
+  footer.ts-foot { background: #0B0A08; color: rgba(244,241,234,0.55); padding: 40px clamp(20px, 5vw, 64px); text-align: center; font-size: 13px; }
+  footer.ts-foot a { color: rgba(244,241,234,0.7); text-decoration: none; }
+  footer.ts-foot a:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+  <header class="ts-nav">
+    <a class="ts-brand" href="index.html" aria-label="Translate Sports — home">
+      <img src="images/gallery-02.jpg" alt="Translate Sports logo">
+      <span>Translate<span class="acc">&nbsp;Sports</span></span>
+    </a>
+    <nav class="ts-links" aria-label="Primary">
+      <div class="ts-desklinks">
+        <a href="index.html">Home</a>
+        <a href="Products.dc.html">Products</a>
+        <a href="Reviews.dc.html">Reviews</a>
+      </div>
+      <a class="ts-pill" href="basket.html"><span aria-hidden="true">🧺</span> Basket · <span id="ts-bag-count">0</span></a>
+    </nav>
+  </header>
+
+  <section class="ts-hero">
+    <div class="ts-hero-inner">
+      <p class="ts-eyebrow">Store admin</p>
+      <h1>Request a <span class="acc">change.</span></h1>
+      <p class="ts-note">These are the products live on the site right now, pulled straight from the products page. Edit any one — change its <strong>price, photo, name or details</strong> — or add and remove products. When you submit, a change request is emailed to the site owner, who applies it. Nothing on the live site changes until then.</p>
+    </div>
+  </section>
+
+  <div class="ts-controls">
+    <div class="ts-requester">
+      <label for="ts-req-name">Your name (so the owner knows who requested it)</label>
+      <input id="ts-req-name" type="text" placeholder="e.g. Store manager — Aryan">
+    </div>
+    <button type="button" class="ts-addbtn" id="ts-add-new"><span aria-hidden="true">＋</span> Add a new product</button>
+  </div>
+
+  <main>
+    <p class="ts-status" id="ts-status">Loading current products…</p>
+    <div class="ts-grid" id="ts-grid"></div>
+  </main>
+
+  <footer class="ts-foot">
+    <p>© 2026 Translate Sports · Change requests are emailed to the store owner for review. &nbsp;|&nbsp; <a href="index.html">Back to home</a></p>
+  </footer>
+
+<script>
+(function () {
+  var OWNER_EMAIL = 'sthitpragyasoham@gmail.com';
+  var FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + OWNER_EMAIL;
+
+  // Keep basket counter live
+  function syncCount() {
+    var n = 0; try { n = JSON.parse(localStorage.getItem('ts_basket') || '[]').length; } catch (e) {}
+    document.querySelectorAll('#ts-bag-count').forEach(function (el) { el.textContent = String(n); });
+  }
+  syncCount();
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
+  var CAT_LABELS = { cricket: 'Cricket', training: 'Strength & Training', racquet: 'Racquet', apparel: 'Apparel' };
+
+  // Fallback catalog (used only if the live scrape fails)
+  var FALLBACK = [
+    { cat: 'cricket', name: 'SG Savage Xtreme — English Willow', spec: 'Grade 1 willow · Short handle', price: '₹18,499', img: 'images/product-bat-sg.jpg' }
+  ];
+
+  // Scrape the current products straight from the live Products page (same origin)
+  function loadCatalog() {
+    return fetch('Products.dc.html', { cache: 'no-store' })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then(function (txt) {
+        var m = txt.match(/catalog\s*\(\s*\)\s*\{[\s\S]*?return\s*(\[[\s\S]*?\])\s*;/);
+        if (!m) throw new Error('catalog not found');
+        var arr = (new Function('return (' + m[1] + ')'))();
+        if (!Array.isArray(arr) || !arr.length) throw new Error('empty');
+        return arr;
+      });
+  }
+
+  var statusEl = document.getElementById('ts-status');
+  var gridEl = document.getElementById('ts-grid');
+
+  loadCatalog().then(function (arr) {
+    statusEl.textContent = arr.length + ' products currently live on the site. Click Edit on any product to request a change.';
+    render(arr);
+  }).catch(function (e) {
+    statusEl.textContent = 'Could not scrape live products (' + e.message + ') — showing a fallback list. You can still request changes.';
+    render(FALLBACK);
+  });
+
+  function render(items) {
+    gridEl.innerHTML = '';
+    items.forEach(function (p, i) { gridEl.appendChild(card(p, i)); });
+  }
+
+  function card(p, i) {
+    var el = document.createElement('article');
+    el.className = 'ts-card';
+    el.innerHTML =
+      '<div class="thumb">' +
+        '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" onerror="this.style.visibility=\'hidden\'">' +
+        (p.cat ? '<span class="cat">' + esc(CAT_LABELS[p.cat] || p.cat) + '</span>' : '') +
+      '</div>' +
+      '<div class="body">' +
+        '<h3>' + esc(p.name) + '</h3>' +
+        '<p class="spec">' + esc(p.spec || '') + '</p>' +
+        '<div class="foot"><span class="price">' + esc(p.price || '') + '</span>' +
+        '<button type="button" class="editbtn">Edit</button></div>' +
+      '</div>';
+    el.querySelector('.editbtn').addEventListener('click', function () { openForm(el, p, false); });
+    return el;
+  }
+
+  function field(label, name, value, ph) {
+    return '<div class="field"><label>' + label + '</label><input name="' + name + '" value="' + esc(value || '') + '" placeholder="' + esc(ph || '') + '"></div>';
+  }
+
+  function openForm(cardEl, p, isNew) {
+    // Prevent duplicate forms
+    if (cardEl.querySelector('.ts-form')) return;
+    var editBtn = cardEl.querySelector('.editbtn');
+    if (editBtn) editBtn.disabled = true;
+
+    var form = document.createElement('div');
+    form.className = 'ts-form';
+    form.innerHTML =
+      field('Product name', 'name', p.name, 'Product name') +
+      '<div class="field"><label>Category</label><select name="cat">' +
+        ['cricket', 'training', 'racquet', 'apparel'].map(function (c) {
+          return '<option value="' + c + '"' + (p.cat === c ? ' selected' : '') + '>' + (CAT_LABELS[c] || c) + '</option>';
+        }).join('') +
+      '</select></div>' +
+      field('Details / spec', 'spec', p.spec, 'e.g. Grade 1 willow · Short handle') +
+      field('Price', 'price', p.price, 'e.g. ₹4,999') +
+      field('Picture (image URL or filename)', 'img', p.img, 'e.g. images/product-bat-sg.jpg') +
+      '<div class="field"><label>Anything else? (optional)</label><textarea name="notes" rows="2" placeholder="Notes for the owner"></textarea></div>' +
+      '<div class="row">' +
+        '<button type="button" class="save">' + (isNew ? 'Request new product' : 'Request this change') + '</button>' +
+        (isNew ? '' : '<button type="button" class="remove">Remove product</button>') +
+        '<button type="button" class="cancel">Cancel</button>' +
+      '</div>' +
+      '<div class="msg" style="display:none"></div>';
+    cardEl.appendChild(form);
+
+    var msg = form.querySelector('.msg');
+    function get(n) { var f = form.querySelector('[name="' + n + '"]'); return f ? f.value.trim() : ''; }
+    function showMsg(text, cls) { msg.style.display = 'block'; msg.className = 'msg ' + cls; msg.textContent = text; }
+
+    form.querySelector('.cancel').addEventListener('click', function () {
+      form.remove(); if (editBtn) editBtn.disabled = false;
+    });
+
+    form.querySelector('.save').addEventListener('click', function () {
+      var updated = { name: get('name'), cat: get('cat'), spec: get('spec'), price: get('price'), img: get('img') };
+      if (!updated.name) { showMsg('Please give the product a name.', 'err'); return; }
+      var changes = isNew ? [] : diff(p, updated);
+      if (!isNew && !changes.length && !get('notes')) { showMsg('Nothing changed yet — edit a field first.', 'err'); return; }
+      submit({
+        type: isNew ? 'ADD PRODUCT' : 'EDIT PRODUCT',
+        original: isNew ? null : p,
+        updated: updated,
+        changes: changes,
+        notes: get('notes')
+      }, this, msg, showMsg);
+    });
+
+    var rm = form.querySelector('.remove');
+    if (rm) rm.addEventListener('click', function () {
+      if (!confirm('Request removal of "' + p.name + '" from the site?')) return;
+      submit({ type: 'REMOVE PRODUCT', original: p, updated: null, changes: [], notes: get('notes') }, this, msg, showMsg);
+    });
+  }
+
+  function diff(a, b) {
+    var out = [];
+    ['name', 'cat', 'spec', 'price', 'img'].forEach(function (k) {
+      if ((a[k] || '') !== (b[k] || '')) out.push(k.toUpperCase() + ': "' + (a[k] || '—') + '"  →  "' + (b[k] || '—') + '"');
+    });
+    return out;
+  }
+
+  function submit(payload, btn, msg, showMsg) {
+    var requester = (document.getElementById('ts-req-name').value || '').trim() || 'Anonymous';
+    btn.disabled = true; var old = btn.textContent; btn.textContent = 'Sending…';
+
+    var lines = [];
+    lines.push('Change type: ' + payload.type);
+    lines.push('Requested by: ' + requester);
+    lines.push('');
+    if (payload.original) {
+      lines.push('CURRENT (live now):');
+      lines.push('  Name:  ' + payload.original.name);
+      lines.push('  Cat:   ' + (payload.original.cat || '—'));
+      lines.push('  Spec:  ' + (payload.original.spec || '—'));
+      lines.push('  Price: ' + (payload.original.price || '—'));
+      lines.push('  Image: ' + (payload.original.img || '—'));
+      lines.push('');
+    }
+    if (payload.updated) {
+      lines.push('REQUESTED:');
+      lines.push('  Name:  ' + payload.updated.name);
+      lines.push('  Cat:   ' + (payload.updated.cat || '—'));
+      lines.push('  Spec:  ' + (payload.updated.spec || '—'));
+      lines.push('  Price: ' + (payload.updated.price || '—'));
+      lines.push('  Image: ' + (payload.updated.img || '—'));
+      lines.push('');
+    }
+    if (payload.changes && payload.changes.length) {
+      lines.push('WHAT CHANGED:');
+      payload.changes.forEach(function (c) { lines.push('  • ' + c); });
+      lines.push('');
+    }
+    if (payload.notes) { lines.push('Notes: ' + payload.notes); lines.push(''); }
+
+    var subjectName = (payload.updated || payload.original || {}).name || '';
+    var body = {
+      _subject: '[Translate Sports] Change requested: ' + payload.type + ' — ' + subjectName,
+      _template: 'box',
+      requested_by: requester,
+      change_type: payload.type,
+      product: subjectName,
+      details: lines.join('\n')
+    };
+
+    fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && (res.j.success === true || res.j.success === 'true')) {
+          showMsg('✓ Change request emailed to the owner. They\'ll apply it to the live site.', 'ok');
+          var row = btn.closest('.row'); if (row) row.style.display = 'none';
+        } else {
+          fallbackMailto(body, showMsg);
+        }
+      }).catch(function () { fallbackMailto(body, showMsg); })
+      .then(function () { btn.disabled = false; btn.textContent = old; });
+  }
+
+  // If the email service isn't set up yet, fall back to opening the user's mail app
+  function fallbackMailto(body, showMsg) {
+    var href = 'mailto:' + OWNER_EMAIL + '?subject=' + encodeURIComponent(body._subject) + '&body=' + encodeURIComponent(body.details);
+    showMsg('Couldn\'t auto-send (the email service may need one-time activation). Opening your mail app instead…', 'err');
+    window.location.href = href;
+  }
+
+  // Add new product
+  document.getElementById('ts-add-new').addEventListener('click', function () {
+    var blank = { cat: 'cricket', name: '', spec: '', price: '', img: '' };
+    var el = card(blank, -1);
+    el.querySelector('h3').textContent = 'New product';
+    el.querySelector('.editbtn').remove();
+    gridEl.insertBefore(el, gridEl.firstChild);
+    openForm(el, blank, true);
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
