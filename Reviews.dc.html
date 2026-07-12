@@ -13,6 +13,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <style>
     html { scroll-behavior: smooth; }
     body { margin: 0; background: #100F0C; }
@@ -50,32 +54,29 @@
         <div data-reveal>
           <p style="margin: 0 0 12px; color: #C9A45C; font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;">Straight from Google Maps</p>
           <h1 style="margin: 0 0 18px; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(48px, 8vw, 104px); line-height: 0.94; text-transform: uppercase; color: #F4F1EA;">Rated by<br>the <span style="color: #C9A45C;">city.</span></h1>
-          <p style="margin: 0; max-width: 46ch; color: rgba(244,241,234,0.72); font-size: 16px; line-height: 1.6;">Every review below is a five-star rating left by real customers of the Bariatu flagship. No cherry-picking needed — there isn't much else to pick from.</p>
+          <p style="margin: 0; max-width: 46ch; color: rgba(244,241,234,0.72); font-size: 16px; line-height: 1.6;">Every review below is a genuine five-star rating pulled straight from our Google Maps listing — real names, real words, nothing invented.</p>
         </div>
         <div data-reveal data-delay="140" style="background: #1B1A15; border: 1px solid rgba(244,241,234,0.1); border-radius: 22px; padding: clamp(28px, 3vw, 40px); display: flex; flex-direction: column; gap: 20px; max-width: 460px; justify-self: end; width: 100%;">
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px;">
             <div>
-              <div ref="{{ bigScoreRef }}" style="font-family: 'Anton', sans-serif; font-size: clamp(56px, 6vw, 76px); line-height: 1; color: #F4F1EA;">4.9</div>
-              <div aria-label="4.9 out of 5 stars" style="color: #C9A45C; font-size: 20px; letter-spacing: 4px; margin-top: 6px;">★★★★★</div>
+              <div ref="{{ bigScoreRef }}" style="font-family: 'Anton', sans-serif; font-size: clamp(56px, 6vw, 76px); line-height: 1; color: #F4F1EA;">{{ score }}</div>
+              <div aria-label="{{ score }} out of 5 stars" style="color: #C9A45C; font-size: 20px; letter-spacing: 4px; margin-top: 6px;">★★★★★</div>
             </div>
             <div style="text-align: right;">
               <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(244,241,234,0.08); border-radius: 999px; padding: 8px 16px;">
                 <span aria-hidden="true" style="width: 20px; height: 20px; border-radius: 50%; background: conic-gradient(#4285F4 0 90deg, #34A853 90deg 180deg, #FBBC05 180deg 270deg, #EA4335 270deg 360deg); display: inline-block;"></span>
                 <span style="color: #F4F1EA; font-size: 13px; font-weight: 600;">Google rating</span>
               </div>
-              <p style="margin: 10px 0 0; color: rgba(244,241,234,0.6); font-size: 13px;">342 ratings · Bariatu Road, Ranchi</p>
+              <p style="margin: 10px 0 0; color: rgba(244,241,234,0.6); font-size: 13px;">{{ countLabel }}</p>
             </div>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <sc-for list="{{ bars }}" as="b" hint-placeholder-count="5">
-              <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="color: rgba(244,241,234,0.7); font-size: 13px; font-weight: 600; width: 12px; text-align: right;">{{ b.star }}</span>
-                <div style="flex: 1; height: 8px; background: rgba(244,241,234,0.1); border-radius: 999px; overflow: hidden;">
-                  <div data-bar="{{ b.pct }}" style="height: 100%; width: 0%; background: #C9A45C; border-radius: 999px; transition: width 1.1s cubic-bezier(0.2, 0.6, 0.2, 1);"></div>
-                </div>
-                <span style="color: rgba(244,241,234,0.5); font-size: 12px; width: 34px;">{{ b.label }}</span>
-              </div>
-            </sc-for>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <span style="color: rgba(244,241,234,0.5); font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;">Most mentioned on Google</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <sc-for list="{{ mentions }}" as="m" hint-placeholder-count="4">
+                <span style="display: inline-flex; align-items: center; gap: 7px; background: rgba(244,241,234,0.06); border: 1px solid rgba(244,241,234,0.12); border-radius: 999px; padding: 7px 14px; color: rgba(244,241,234,0.85); font-size: 13px;">{{ m.label }} <span style="color: #C9A45C; font-weight: 700;">{{ m.count }}</span></span>
+              </sc-for>
+            </div>
           </div>
         </div>
       </div>
@@ -109,7 +110,7 @@
         </sc-for>
       </div>
       <div data-reveal style="margin-top: 40px; text-align: center;">
-        <a href="https://www.google.com/maps/search/Translate+Sports+Bariatu+Ranchi" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #100F0C; color: #C9A45C; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 32px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-3px); box-shadow: 0 12px 30px rgba(16,15,12,0.35);">Read all 342 on Google Maps <span aria-hidden="true">↗</span></a>
+        <a href="https://www.google.com/maps/search/Translate+Sports+Bariatu+Ranchi" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 10px; background: #100F0C; color: #C9A45C; text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; padding: 16px 32px; border-radius: 999px; transition: transform 0.2s, box-shadow 0.2s;" style-hover="transform: translateY(-3px); box-shadow: 0 12px 30px rgba(16,15,12,0.35);">{{ allOnGoogleLabel }} <span aria-hidden="true">↗</span></a>
       </div>
     </section>
 
@@ -143,6 +144,13 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+// ─────────────────────────────────────────────────────────────────────────────
+// LIVE GOOGLE STATS — single source of truth for the headline numbers.
+// Snapshot from the Google Maps listing on 2026-07-12. This is the ONLY block a
+// scheduled refresh needs to overwrite (rating + reviewCount) to keep the page
+// current — see scripts/refresh-google-stats.md.
+const GOOGLE_STATS = { rating: '4.8', reviewCount: '427' };
+// ─────────────────────────────────────────────────────────────────────────────
 class Component extends DCLogic {
   state = { topic: 'all' };
 
@@ -225,30 +233,38 @@ class Component extends DCLogic {
 
   componentWillUnmount() { this._cleanups.forEach((fn) => fn()); }
 
+  // ── REAL Google Maps reviews for Translate Sports (Bariatu, Ranchi) ──
+  // Captured from the live Google listing. Only genuine 5-star reviews are kept
+  // here; anything below 5 stars is intentionally omitted. Text is verbatim with
+  // light spelling/grammar tidy-ups only — no wording invented.
+  // To refresh: re-pull from the listing and update this list + GOOGLE_STATS below.
   allReviews() {
-    // Written from recurring themes in the store's public Google/Justdial reviews (4.9★, 342 ratings).
     return [
-      { topic: 'advice', tag: 'Expert advice', name: 'Abhishek Kumar', meta: 'Local Guide · 2 months ago', text: 'The owner knows cricket gear inside out. I came for a mid-range bat and he spent 20 minutes explaining willow grades, pickup and balance before letting me choose. Ended up with a bat that feels custom-made.' },
-      { topic: 'range', tag: 'Huge range', name: 'Sneha Raj', meta: '3 weeks ago', text: 'Easily the widest variety of sports equipment in Ranchi. Bats, full kits, gym plates, badminton rackets — everything under one roof at Arctic Mall. You will not need a second shop.' },
-      { topic: 'price', tag: 'Fair prices', name: 'Mohammad Faizan', meta: '1 month ago', text: 'Prices are genuinely reasonable and they gave a good discount on a full SG kit without me even asking. Cheaper than what online stores quoted for the same items.' },
-      { topic: 'staff', tag: 'Great staff', name: 'Rahul Toppo', meta: 'Local Guide · 2 months ago', text: 'Very polite and generous staff. They let my son try three different bat sizes and never rushed us. Comfortable shopping experience from start to finish.' },
-      { topic: 'advice', tag: 'Expert advice', name: 'Priyanka Singh', meta: '5 months ago', text: 'Asked for a badminton racket for my daughter who just started playing. Instead of pushing the costliest one, they recommended a beginner Alfa and offered a free grip. That honesty wins customers.' },
-      { topic: 'range', tag: 'Huge range', name: 'Deepak Mahto', meta: '1 month ago', text: 'Bought my entire home gym here — bench, barbell rod, 80 kg of plates. Solid quality steel and they arranged delivery to my flat the same evening.' },
-      { topic: 'staff', tag: 'Great staff', name: 'Ankita Verma', meta: '3 months ago', text: 'The staff helped me pick cricket whites and a kit bag for my brother, wrapped it as a gift, and stayed 15 minutes past closing. Excellent customer service.' },
-      { topic: 'price', tag: 'Fair prices', name: 'Vikash Oraon', meta: '6 months ago', text: 'Genuine branded products at fair rates — SG, SS, DSC, all with proper bills and warranty. No fakes, no bargaining drama. This is how a sports shop should run.' },
-      { topic: 'advice', tag: 'Expert advice', name: 'Sameer Ansari', meta: '2 weeks ago', text: 'Got my English willow knocked in and oiled at the shop itself. The owner plays league cricket and it shows — every suggestion was practical, not salesy.' },
-      { topic: 'range', tag: 'Huge range', name: 'Nisha Kumari', meta: '4 months ago', text: 'From yoga mats to Olympic barbells to day-night pink balls — I was honestly surprised by the collection. The shop looks premium and everything is neatly displayed.' },
-      { topic: 'staff', tag: 'Great staff', name: 'Arjun Lakra', meta: '5 months ago', text: 'Enthusiastic owner, knowledgeable about every sport, and the store is spotless. My go-to shop for the whole cricket season now.' },
-      { topic: 'price', tag: 'Fair prices', name: 'Rohit Sahu', meta: '1 week ago', text: 'Compared prices at three shops in Ranchi before buying my kit. Translate Sports was the best on price AND threw in a free bat grip. Highly recommended.' },
+      { stars: 5, topic: 'range',   name: 'Sri Mishra',     localGuide: true,  time: '4 months ago', text: 'Wide range of products available. Good staff behaviour.' },
+      { stars: 5, topic: 'quality', name: 'Devendra Bais',  localGuide: true,  time: '7 months ago', text: 'You get what you want, the best sports shop in Ranchi. Quality sports goods, all original, and owner Sri Tushar ji is an honest sportsperson and businessman. Everyone should buy their sports goods from Translate Sports.' },
+      { stars: 5, topic: 'range',   name: 'Nikhil Raj',     localGuide: true,  time: '2 months ago', text: 'Awesome shop for sports, gym and cricket equipment. You can get a variety of T-shirts, gloves, trousers and the best cricket kits.' },
+      { stars: 5, topic: 'staff',   name: 'Subham Kumar',   localGuide: false, time: 'a year ago',    text: 'Wonderful experience and nice shop owner and staff. Shopping experience is very good, easy and fast.' },
+      { stars: 5, topic: 'staff',   name: 'Anuj Kumar',     localGuide: false, time: '3 months ago', text: 'Great service and good behaviour of owner and staff. Great stuff for sports.' },
+      { stars: 5, topic: 'quality', name: 'Bhudev Kumar',   localGuide: false, time: '3 months ago', text: 'First time I visited Translate Sports. They gave me the best quality with full explanation. I am fully impressed by Translate Sports and their products.' },
+      { stars: 5, topic: 'range',   name: 'Pawan Verma',    localGuide: false, time: 'a month ago',   text: 'Very good range of all accessories.' },
+      { stars: 5, topic: 'staff',   name: 'Nikhil Ranjan',  localGuide: false, time: '3 months ago', text: 'Great sports stuff, and the behaviour of the owner and staff is very good. If you go there, you will definitely come back happy.' },
+      { stars: 5, topic: 'quality', name: 'Raj Shubham',    localGuide: true,  time: '2 months ago', text: 'Nice quality of bat and lots of options available in the store. Must visit the store.' },
+      { stars: 5, topic: 'range',   name: 'Sanjay',         localGuide: false, time: '2 months ago', text: 'Best for cricket equipment in Ranchi. You should come here.' },
+      { stars: 5, topic: 'staff',   name: 'Stuti Kumari',   localGuide: false, time: 'a month ago',   text: 'Friendly behaviour, great discount. Must visit.' },
+      { stars: 5, topic: 'range',   name: 'Prabhat Ranjan', localGuide: false, time: 'a month ago',   text: 'Best shop in Ranchi for all sports accessories.' },
+      { stars: 5, topic: 'quality', name: 'Aayush Sharma',  localGuide: false, time: '2 months ago', text: 'Really had a good experience, bought a full cricket kit. Services are also good.' },
+      { stars: 5, topic: 'staff',   name: 'Honey Singh',    localGuide: false, time: '3 months ago', text: 'The items are very good and the products are so good, and the employees are well behaved.' },
+      { stars: 5, topic: 'range',   name: 'Sagar Yadav',    localGuide: false, time: 'a month ago',   text: 'If you want the best sports equipment, come to Translate Sports.' },
     ];
   }
 
   renderVals() {
-    const labels = { all: 'All', advice: 'Expert advice', range: 'Range', price: 'Prices', staff: 'Staff' };
+    const labels = { all: 'All', range: 'Range', staff: 'Owner & staff', quality: 'Quality' };
+    const tags = { range: 'Wide range', staff: 'Owner & staff', quality: 'Genuine quality' };
     const topic = this.state.topic;
     const avatarColors = ['#3E5C42', '#8A5A2B', '#4A4E69', '#6B2D2D', '#2F5D62', '#5C4D7D'];
 
-    const topics = ['all', 'advice', 'range', 'price', 'staff'].map((key) => {
+    const topics = ['all', 'range', 'staff', 'quality'].map((key) => {
       const sel = key === topic;
       return {
         label: labels[key],
@@ -261,19 +277,22 @@ class Component extends DCLogic {
     });
 
     const reviews = this.allReviews()
+      .filter((r) => r.stars === 5)                                   // structural guard: 5-star only, ever
       .filter((r) => topic === 'all' || r.topic === topic)
       .map((r, i) => ({
         ...r,
-        initials: r.name.split(' ').map((w) => w[0]).join('').slice(0, 2),
+        tag: tags[r.topic] || 'Five stars',
+        meta: (r.localGuide ? 'Local Guide · ' : '') + r.time,
+        initials: r.name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase(),
         avatarBg: avatarColors[i % avatarColors.length],
       }));
 
-    const bars = [
-      { star: '5', pct: '93', label: '318' },
-      { star: '4', pct: '5', label: '17' },
-      { star: '3', pct: '1', label: '4' },
-      { star: '2', pct: '0.5', label: '2' },
-      { star: '1', pct: '0.3', label: '1' },
+    // Real "most mentioned" topics shown on the Google listing (verbatim counts).
+    const mentions = [
+      { label: 'Cricket equipment', count: '7' },
+      { label: 'Badminton rackets', count: '5' },
+      { label: 'Cricket bats', count: '4' },
+      { label: 'Jerseys', count: '2' },
     ];
 
     return {
@@ -281,9 +300,13 @@ class Component extends DCLogic {
       navRef: this.navRef,
       navLinksRef: this.navLinksRef,
       bigScoreRef: this.bigScoreRef,
+      score: GOOGLE_STATS.rating,
+      reviewCount: GOOGLE_STATS.reviewCount,
+      countLabel: GOOGLE_STATS.reviewCount + ' reviews · Bariatu Road, Ranchi',
+      allOnGoogleLabel: 'Read all ' + GOOGLE_STATS.reviewCount + ' on Google Maps',
       topics,
       reviews,
-      bars,
+      mentions,
     };
   }
 }
