@@ -69,6 +69,17 @@
   .ts-summary small { color: rgba(244,241,234,0.6); }
   .ts-btn-big { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; margin-top: 22px; background: var(--accent); color: #100F0C; border: none; font-family: 'Archivo', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 18px 30px; border-radius: 999px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; }
   .ts-btn-big:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(201,164,92,0.4); }
+  .ts-btn-big:disabled { opacity: 0.6; cursor: default; transform: none; box-shadow: none; }
+
+  /* reservation contact form (inside the dark summary card) */
+  .ts-resform { display: flex; flex-direction: column; gap: 14px; margin-top: 8px; }
+  .ts-resform .fld { display: flex; flex-direction: column; gap: 6px; }
+  .ts-resform label { color: rgba(244,241,234,0.7); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .ts-resform input, .ts-resform textarea { background: rgba(244,241,234,0.07); border: 1px solid rgba(244,241,234,0.2); color: #F4F1EA; font-family: 'Archivo', sans-serif; font-size: 15px; padding: 13px 16px; border-radius: 12px; outline: none; transition: border-color 0.2s; }
+  .ts-resform input:focus, .ts-resform textarea:focus { border-color: var(--accent); }
+  .ts-resform .btnrow { display: flex; gap: 10px; margin-top: 4px; }
+  .ts-resform .back { background: transparent; color: rgba(244,241,234,0.75); border: 1px solid rgba(244,241,234,0.25); font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 15px 22px; border-radius: 999px; cursor: pointer; }
+  .ts-resform .msg { font-size: 14px; color: #E4726A; min-height: 1px; }
 
   .ts-empty { text-align: center; padding: 60px 20px; }
   .ts-empty p { color: rgba(16,15,12,0.6); font-size: 17px; margin: 0 0 24px; }
@@ -122,6 +133,7 @@
     <p>© 2026 Translate Sports · Booty Road, Bariatu, Ranchi · Reserve online, collect in store. &nbsp;|&nbsp; <a href="index.html">Back to home</a></p>
   </footer>
 
+<script src="store.js"></script>
 <script>
 (function () {
   var KEY = 'ts_basket';
@@ -229,17 +241,82 @@
     document.getElementById('ts-reserve-btn').addEventListener('click', reserve);
   }
 
+  // Step 1 — collect who's reserving before we send it to the store.
   function reserve() {
     var g = grouped();
     if (!g.length) return;
-    var list = g.map(function (it) { return '• ' + it.qty + ' × ' + it.name; }).join('\n');
-    // Mark this basket as reserved locally, then show the pickup instructions.
+    var count = g.reduce(function (s, it) { return s + it.qty; }, 0);
+    var view = document.getElementById('ts-basket-view');
+    view.innerHTML =
+      '<div class="ts-summary">' +
+        '<div class="ts-summary-row total" style="border-top:none;margin-top:0;padding-top:0;"><span>Reserve ' + count + ' item(s)</span></div>' +
+        '<div class="ts-summary-row"><small>Leave your name and number so the store can set your gear aside and reach you if needed. Nothing is charged.</small></div>' +
+        '<div class="ts-resform">' +
+          '<div class="fld"><label for="rf-name">Your name</label><input id="rf-name" type="text" placeholder="Full name" autocomplete="name"></div>' +
+          '<div class="fld"><label for="rf-phone">Phone number</label><input id="rf-phone" type="tel" placeholder="e.g. 98xxxxxxxx" autocomplete="tel"></div>' +
+          '<div class="fld"><label for="rf-note">Note for the store (optional)</label><textarea id="rf-note" rows="2" placeholder="Size, colour, pickup time…"></textarea></div>' +
+          '<div class="msg" id="rf-msg"></div>' +
+          '<div class="btnrow">' +
+            '<button type="button" class="back" id="rf-back">← Back</button>' +
+            '<button type="button" class="ts-btn-big" style="margin-top:0;" id="rf-submit">Confirm reservation <span aria-hidden="true">→</span></button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('rf-back').addEventListener('click', render);
+    document.getElementById('rf-submit').addEventListener('click', function () { submitReservation(g, count, this); });
+    document.getElementById('rf-name').focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Step 2 — save the reservation to the store (Firebase), then show pickup info.
+  function submitReservation(g, count, btn) {
+    var name = (document.getElementById('rf-name').value || '').trim();
+    var phone = (document.getElementById('rf-phone').value || '').trim();
+    var note = (document.getElementById('rf-note').value || '').trim();
+    var msg = document.getElementById('rf-msg');
+    if (!name) { msg.textContent = 'Please enter your name.'; return; }
+    if (phone.replace(/\D/g, '').length < 7) { msg.textContent = 'Please enter a valid phone number.'; return; }
+
+    var anyPriced = false, total = 0;
+    var items = g.map(function (it) {
+      var pn = priceNum(it.price);
+      if (!isNaN(pn)) { anyPriced = true; total += pn * it.qty; }
+      return { name: it.name, spec: it.spec || '', price: it.price || '', qty: it.qty };
+    });
+
+    var payload = {
+      customer: name, phone: phone, note: note,
+      items: items, itemCount: count,
+      total: anyPriced ? total : null,
+      totalText: anyPriced ? fmt(total) : 'In store',
+      status: 'new'
+    };
+
+    msg.textContent = ''; btn.disabled = true; var old = btn.innerHTML; btn.innerHTML = 'Reserving…';
+
+    var done = function () { showConfirm(count, name); };
+    if (window.TSStore && TSStore.submitReservation) {
+      TSStore.submitReservation(payload)
+        .then(done)
+        .catch(function () {
+          btn.disabled = false; btn.innerHTML = old;
+          msg.textContent = 'Could not reach the store just now. Please check your connection and try again.';
+        });
+    } else {
+      // store.js failed to load — don't lose the reservation silently
+      btn.disabled = false; btn.innerHTML = old;
+      msg.textContent = 'Reservation service unavailable. Please call the store to reserve.';
+    }
+  }
+
+  // Step 3 — confirmation with the in-store pickup address.
+  function showConfirm(count, name) {
     var view = document.getElementById('ts-basket-view');
     view.innerHTML =
       '<div class="ts-confirm">' +
         '<div class="tick" aria-hidden="true">✓</div>' +
-        '<h2>Reserved. <span class="acc">See you soon.</span></h2>' +
-        '<p>We\'ve noted your reservation for <strong>' + g.reduce(function (s, it) { return s + it.qty; }, 0) + ' item(s)</strong>. Remember — this is a reservation, not a paid order.</p>' +
+        '<h2>Reserved. <span class="acc">See you soon' + (name ? ', ' + esc(name.split(' ')[0]) : '') + '.</span></h2>' +
+        '<p>Your reservation for <strong>' + count + ' item(s)</strong> is in — the store has been notified and will set them aside. Remember, this is a reservation, not a paid order.</p>' +
         '<p><strong>Pick up your items at Translate Sports</strong> and pay at the counter when you collect.</p>' +
         '<div class="ts-address">' +
           '<span class="lbl">Pickup location</span>' +

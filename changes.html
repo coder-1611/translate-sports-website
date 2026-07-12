@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Request a Change — Translate Sports</title>
+<title>Store Admin — Translate Sports</title>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -32,27 +32,82 @@
   .ts-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #100F0C; text-decoration: none; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 12px 22px; border-radius: 999px; border: none; cursor: pointer; font-family: 'Archivo', sans-serif; transition: transform 0.2s, box-shadow 0.2s; }
   .ts-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,164,92,0.4); }
 
+  /* PASSCODE GATE */
+  .ts-gate { position: fixed; inset: 0; z-index: 500; background: #100F0C; display: flex; align-items: center; justify-content: center; padding: 24px; }
+  .ts-gate .box { width: 100%; max-width: 380px; text-align: center; }
+  .ts-gate img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(201,164,92,0.5); margin-bottom: 20px; }
+  .ts-gate h1 { font-family: 'Anton', sans-serif; font-weight: 400; font-size: 34px; text-transform: uppercase; color: #F4F1EA; margin: 0 0 8px; }
+  .ts-gate p { color: rgba(244,241,234,0.6); font-size: 14px; margin: 0 0 22px; }
+  .ts-gate input { width: 100%; background: rgba(244,241,234,0.07); border: 1px solid rgba(244,241,234,0.2); color: #F4F1EA; font-family: 'Archivo', sans-serif; font-size: 16px; padding: 15px 18px; border-radius: 12px; outline: none; text-align: center; letter-spacing: 0.1em; }
+  .ts-gate input:focus { border-color: var(--accent); }
+  .ts-gate button { width: 100%; margin-top: 12px; background: var(--accent); color: #100F0C; border: none; font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 15px; border-radius: 999px; cursor: pointer; }
+  .ts-gate .err { color: #E4726A; font-size: 13px; margin-top: 12px; min-height: 1em; }
+
   /* HERO */
-  .ts-hero { position: relative; background: #100F0C; padding: clamp(130px, 18vh, 190px) clamp(20px, 5vw, 64px) clamp(40px, 6vw, 64px); overflow: hidden; }
+  .ts-hero { position: relative; background: #100F0C; padding: clamp(120px, 16vh, 175px) clamp(20px, 5vw, 64px) clamp(36px, 5vw, 56px); overflow: hidden; }
   .ts-hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(80% 70% at 80% 0%, rgba(201,164,92,0.16), transparent 60%); pointer-events: none; }
   .ts-hero-inner { position: relative; max-width: 1280px; margin: 0 auto; }
   .ts-eyebrow { margin: 0 0 12px; color: var(--accent); font-size: 13px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; }
-  .ts-hero h1 { margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(44px, 8vw, 100px); line-height: 0.94; text-transform: uppercase; color: #F4F1EA; }
+  .ts-hero h1 { margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(44px, 8vw, 96px); line-height: 0.94; text-transform: uppercase; color: #F4F1EA; }
   .ts-hero h1 .acc { color: var(--accent); }
-  .ts-note { margin: 22px 0 0; max-width: 68ch; color: rgba(244,241,234,0.8); font-size: clamp(15px,1.6vw,17px); line-height: 1.6; }
+  .ts-note { margin: 20px 0 0; max-width: 62ch; color: rgba(244,241,234,0.8); font-size: clamp(15px,1.6vw,17px); line-height: 1.6; }
+  .ts-jump { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .ts-jump a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #F4F1EA; border: 1px solid rgba(244,241,234,0.3); border-radius: 999px; padding: 10px 18px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; transition: border-color 0.2s, background 0.2s; }
+  .ts-jump a:hover { border-color: var(--accent); background: rgba(201,164,92,0.12); }
+  .ts-jump .badge { background: var(--accent); color: #100F0C; border-radius: 999px; padding: 1px 9px; font-size: 12px; }
 
-  /* CONTROLS */
-  .ts-controls { max-width: 1280px; margin: 0 auto; padding: clamp(28px,4vw,44px) clamp(20px, 5vw, 64px) 0; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+  main { max-width: 1280px; margin: 0 auto; padding: clamp(32px,5vw,56px) clamp(20px, 5vw, 64px) clamp(72px, 10vw, 120px); }
+
+  /* SECTION HEADS */
+  .ts-sec { scroll-margin-top: 90px; }
+  .ts-sec + .ts-sec { margin-top: clamp(56px, 8vw, 96px); }
+  .ts-sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px 18px; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 2px solid rgba(16,15,12,0.12); }
+  .ts-sec-head h2 { margin: 0; font-family: 'Anton', sans-serif; font-weight: 400; font-size: clamp(30px, 5vw, 52px); line-height: 1; text-transform: uppercase; }
+  .ts-sec-head .kicker { color: #8A7B55; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; }
+  .ts-sec-head .live { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; color: rgba(16,15,12,0.55); font-size: 13px; }
+  .ts-sec-head .dot { width: 8px; height: 8px; border-radius: 50%; background: #3FA66A; box-shadow: 0 0 0 0 rgba(63,166,106,0.5); animation: ts-pulse 2s infinite; }
+  @keyframes ts-pulse { 0% { box-shadow: 0 0 0 0 rgba(63,166,106,0.5); } 70% { box-shadow: 0 0 0 8px rgba(63,166,106,0); } 100% { box-shadow: 0 0 0 0 rgba(63,166,106,0); } }
+  .ts-secnote { margin: -8px 0 22px; color: rgba(16,15,12,0.6); font-size: 14px; }
+
+  /* RESERVATION CARDS (the focus) */
+  .ts-res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 18px; }
+  .ts-res { background: #FFFFFF; border: 1px solid rgba(16,15,12,0.08); border-left: 4px solid var(--accent); border-radius: 16px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+  .ts-res.collected { border-left-color: #3FA66A; opacity: 0.8; }
+  .ts-res .top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .ts-res .who { font-size: 18px; font-weight: 700; line-height: 1.2; }
+  .ts-res .phone { display: block; margin-top: 3px; font-size: 14px; color: rgba(16,15,12,0.7); text-decoration: none; }
+  .ts-res .phone:hover { color: var(--accent); }
+  .ts-res .status { flex: none; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; }
+  .ts-res .status.new { background: rgba(201,164,92,0.18); color: #8A6D2B; }
+  .ts-res .status.collected { background: rgba(63,166,106,0.16); color: #2C7A4B; }
+  .ts-res .when { color: rgba(16,15,12,0.5); font-size: 12.5px; }
+  .ts-res ul.items { list-style: none; margin: 0; padding: 12px 0; border-top: 1px dashed rgba(16,15,12,0.15); border-bottom: 1px dashed rgba(16,15,12,0.15); display: flex; flex-direction: column; gap: 6px; }
+  .ts-res ul.items li { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
+  .ts-res ul.items .q { color: var(--accent); font-weight: 700; }
+  .ts-res .tot { display: flex; justify-content: space-between; font-size: 15px; font-weight: 700; }
+  .ts-res .note { font-size: 13.5px; color: rgba(16,15,12,0.7); background: rgba(16,15,12,0.04); border-radius: 10px; padding: 10px 12px; }
+  .ts-res .note b { color: #100F0C; }
+  .ts-res .acts { display: flex; gap: 10px; margin-top: 2px; }
+  .ts-res .acts button { flex: 1 1 auto; font-family: 'Archivo', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 11px 12px; border-radius: 999px; cursor: pointer; border: 1px solid; transition: background 0.2s, color 0.2s; }
+  .ts-res .acts .done { background: #100F0C; color: var(--accent); border-color: #100F0C; }
+  .ts-res .acts .undo { background: transparent; color: rgba(16,15,12,0.7); border-color: rgba(16,15,12,0.3); }
+  .ts-res .acts .del { background: transparent; color: #C4453D; border-color: rgba(196,69,61,0.4); flex: 0 0 auto; }
+  .ts-res .acts .del:hover { background: rgba(196,69,61,0.1); }
+
+  .ts-empty { text-align: center; padding: 48px 20px; background: #FFFFFF; border: 1px dashed rgba(16,15,12,0.18); border-radius: 16px; color: rgba(16,15,12,0.6); font-size: 16px; }
+  .ts-loading { color: rgba(16,15,12,0.55); font-size: 14px; }
+
+  /* CONTROLS (changes section) */
+  .ts-controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; justify-content: space-between; margin-bottom: 22px; }
   .ts-requester { flex: 1 1 320px; min-width: 0; }
   .ts-requester label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(16,15,12,0.6); margin-bottom: 8px; }
   .ts-requester input { width: 100%; background: #FFFFFF; border: 1px solid rgba(16,15,12,0.2); border-radius: 12px; padding: 12px 16px; font-family: 'Archivo', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; }
   .ts-requester input:focus { border-color: var(--accent); }
-  .ts-addbtn { display: inline-flex; align-items: center; gap: 8px; background: #100F0C; color: var(--accent); border: none; font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 15px 26px; border-radius: 999px; cursor: pointer; transition: transform 0.2s; align-self: flex-end; }
+  .ts-addbtn { display: inline-flex; align-items: center; gap: 8px; background: #100F0C; color: var(--accent); border: none; font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 15px 26px; border-radius: 999px; cursor: pointer; transition: transform 0.2s; }
   .ts-addbtn:hover { transform: translateY(-2px); }
-
-  /* GRID */
-  main { max-width: 1280px; margin: 0 auto; padding: clamp(28px,4vw,44px) clamp(20px, 5vw, 64px) clamp(72px, 10vw, 120px); }
   .ts-status { color: rgba(16,15,12,0.6); font-size: 14px; margin: 0 0 22px; }
+
+  /* PRODUCT CARDS + EDIT FORM */
   .ts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 18px; }
   .ts-card { background: #1B1A15; border: 1px solid rgba(244,241,234,0.08); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
   .ts-card .thumb { position: relative; aspect-ratio: 1 / 1; background: #F4F1EA; overflow: hidden; }
@@ -65,8 +120,6 @@
   .ts-card .price { color: #F4F1EA; font-size: 18px; font-weight: 700; }
   .ts-card .editbtn { background: transparent; border: 1px solid rgba(201,164,92,0.6); color: var(--accent); font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s; }
   .ts-card .editbtn:hover { background: var(--accent); color: #100F0C; }
-
-  /* EDIT FORM (inside card) */
   .ts-form { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid rgba(244,241,234,0.08); }
   .ts-form .field { display: flex; flex-direction: column; gap: 5px; }
   .ts-form label { color: rgba(244,241,234,0.65); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -87,67 +140,205 @@
 </style>
 </head>
 <body>
-  <header class="ts-nav">
-    <a class="ts-brand" href="index.html" aria-label="Translate Sports — home">
+  <!-- PASSCODE GATE -->
+  <div class="ts-gate" id="ts-gate">
+    <div class="box">
       <img src="images/gallery-02.jpg" alt="Translate Sports logo">
-      <span>Translate<span class="acc">&nbsp;Sports</span></span>
-    </a>
-    <nav class="ts-links" aria-label="Primary">
-      <div class="ts-desklinks">
-        <a href="index.html">Home</a>
-        <a href="Products.dc.html">Products</a>
-        <a href="Reviews.dc.html">Reviews</a>
-      </div>
-      <a class="ts-pill" href="basket.html"><span aria-hidden="true">🧺</span> Basket · <span id="ts-bag-count">0</span></a>
-    </nav>
-  </header>
-
-  <section class="ts-hero">
-    <div class="ts-hero-inner">
-      <p class="ts-eyebrow">Store admin</p>
-      <h1>Request a <span class="acc">change.</span></h1>
-      <p class="ts-note">These are the products live on the site right now, pulled straight from the products page. Edit any one — change its <strong>price, photo, name or details</strong> — or add and remove products. When you submit, a change request is emailed to the site owner, who applies it. Nothing on the live site changes until then.</p>
+      <h1>Store Admin</h1>
+      <p>Enter the store passcode to view reservations.</p>
+      <input id="ts-gate-input" type="password" placeholder="Passcode" autocomplete="off" aria-label="Admin passcode">
+      <button type="button" id="ts-gate-btn">Enter dashboard</button>
+      <div class="err" id="ts-gate-err"></div>
     </div>
-  </section>
-
-  <div class="ts-controls">
-    <div class="ts-requester">
-      <label for="ts-req-name">Your name (so the owner knows who requested it)</label>
-      <input id="ts-req-name" type="text" placeholder="e.g. Store manager — Aryan">
-    </div>
-    <button type="button" class="ts-addbtn" id="ts-add-new"><span aria-hidden="true">＋</span> Add a new product</button>
   </div>
 
-  <main>
-    <p class="ts-status" id="ts-status">Loading current products…</p>
-    <div class="ts-grid" id="ts-grid"></div>
-  </main>
+  <div id="ts-app" style="display:none;">
+    <header class="ts-nav">
+      <a class="ts-brand" href="index.html" aria-label="Translate Sports — home">
+        <img src="images/gallery-02.jpg" alt="Translate Sports logo">
+        <span>Translate<span class="acc">&nbsp;Sports</span></span>
+      </a>
+      <nav class="ts-links" aria-label="Primary">
+        <div class="ts-desklinks">
+          <a href="index.html">Home</a>
+          <a href="Products.dc.html">Products</a>
+          <a href="Reviews.dc.html">Reviews</a>
+        </div>
+        <a class="ts-pill" href="basket.html"><span aria-hidden="true">🧺</span> Basket · <span id="ts-bag-count">0</span></a>
+      </nav>
+    </header>
 
-  <footer class="ts-foot">
-    <p>© 2026 Translate Sports · Change requests are emailed to the store owner for review. &nbsp;|&nbsp; <a href="index.html">Back to home</a></p>
-  </footer>
+    <section class="ts-hero">
+      <div class="ts-hero-inner">
+        <p class="ts-eyebrow">Store admin · Translate Sports</p>
+        <h1>Reservations <span class="acc">dashboard.</span></h1>
+        <p class="ts-note">Every reservation customers make from the site lands here in real time. Set gear aside, call them on the number they left, and mark it collected once they pick up. Need to change a product on the site? That's the section below.</p>
+        <div class="ts-jump">
+          <a href="#reservations">Reservations <span class="badge" id="ts-res-badge">0</span></a>
+          <a href="#changes">Products &amp; changes</a>
+        </div>
+      </div>
+    </section>
 
+    <main>
+      <!-- ========== SECTION 1: RESERVATIONS (focus) ========== -->
+      <section class="ts-sec" id="reservations">
+        <div class="ts-sec-head">
+          <span class="kicker">01 — What customers reserved</span>
+          <h2 style="flex-basis:100%;">Reservations</h2>
+          <span class="live"><span class="dot"></span> Live · auto-refreshing</span>
+        </div>
+        <p class="ts-secnote" id="ts-res-status">Loading reservations…</p>
+        <div class="ts-res-grid" id="ts-res-grid"></div>
+      </section>
+
+      <!-- ========== SECTION 2: PRODUCTS & CHANGES ========== -->
+      <section class="ts-sec" id="changes">
+        <div class="ts-sec-head">
+          <span class="kicker">02 — Site catalogue</span>
+          <h2 style="flex-basis:100%;">Products &amp; changes</h2>
+        </div>
+        <p class="ts-secnote">These are the products live on the site right now, scraped from the products page. Edit any one — price, photo, name, details — or add/remove a product. Submitting emails the change to <b>sthitpragyasoham@gmail.com</b> to apply. Nothing on the live site changes until then.</p>
+        <div class="ts-controls">
+          <div class="ts-requester">
+            <label for="ts-req-name">Requested by (for the email)</label>
+            <input id="ts-req-name" type="text" placeholder="e.g. Store manager — Aryan">
+          </div>
+          <button type="button" class="ts-addbtn" id="ts-add-new"><span aria-hidden="true">＋</span> Add a new product</button>
+        </div>
+        <p class="ts-status" id="ts-status">Loading current products…</p>
+        <div class="ts-grid" id="ts-grid"></div>
+      </section>
+    </main>
+
+    <footer class="ts-foot">
+      <p>© 2026 Translate Sports · Store admin · Reservations sync live; product changes are emailed to the owner. &nbsp;|&nbsp; <a href="index.html">Back to site</a></p>
+    </footer>
+  </div>
+
+<script src="store.js"></script>
 <script>
 (function () {
   var OWNER_EMAIL = 'sthitpragyasoham@gmail.com';
   var FORM_ENDPOINT = 'https://formsubmit.co/ajax/' + OWNER_EMAIL;
+  var ADMIN_PASSCODE = 'translate';   // client-side gate only — keeps casual visitors out, not real security
+  var GATE_KEY = 'ts_admin_ok';
 
-  // Keep basket counter live
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
   function syncCount() {
     var n = 0; try { n = JSON.parse(localStorage.getItem('ts_basket') || '[]').length; } catch (e) {}
     document.querySelectorAll('#ts-bag-count').forEach(function (el) { el.textContent = String(n); });
   }
-  syncCount();
 
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]; }); }
+  /* ---------------- passcode gate ---------------- */
+  var gate = document.getElementById('ts-gate');
+  var app = document.getElementById('ts-app');
+  function unlock() {
+    gate.style.display = 'none';
+    app.style.display = 'block';
+    syncCount();
+    startReservations();
+    startProducts();
+  }
+  function tryUnlock() {
+    var v = document.getElementById('ts-gate-input').value;
+    if (v === ADMIN_PASSCODE) {
+      try { sessionStorage.setItem(GATE_KEY, '1'); } catch (e) {}
+      unlock();
+    } else {
+      document.getElementById('ts-gate-err').textContent = 'Incorrect passcode.';
+    }
+  }
+  document.getElementById('ts-gate-btn').addEventListener('click', tryUnlock);
+  document.getElementById('ts-gate-input').addEventListener('keydown', function (e) { if (e.key === 'Enter') tryUnlock(); });
+  var alreadyOk = false; try { alreadyOk = sessionStorage.getItem(GATE_KEY) === '1'; } catch (e) {}
+  if (alreadyOk) unlock(); else document.getElementById('ts-gate-input').focus();
+
+  /* ---------------- reservations (the focus) ---------------- */
+  function timeAgo(ts) {
+    if (!ts) return '';
+    var s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 60) return 'just now';
+    var m = Math.floor(s / 60); if (m < 60) return m + ' min ago';
+    var h = Math.floor(m / 60); if (h < 24) return h + ' hr' + (h > 1 ? 's' : '') + ' ago';
+    var d = Math.floor(h / 24); if (d < 7) return d + ' day' + (d > 1 ? 's' : '') + ' ago';
+    try { return new Date(ts).toLocaleDateString(); } catch (e) { return ''; }
+  }
+
+  function resCard(r) {
+    var collected = r.status === 'collected';
+    var items = Array.isArray(r.items) ? r.items : [];
+    var itemsHtml = items.map(function (it) {
+      return '<li><span><span class="q">' + (it.qty || 1) + '×</span> ' + esc(it.name) + '</span>' +
+             (it.price ? '<span>' + esc(String(it.price)) + '</span>' : '') + '</li>';
+    }).join('') || '<li><span>(no item details)</span></li>';
+    var phoneDigits = String(r.phone || '').replace(/[^0-9+]/g, '');
+
+    return '<article class="ts-res' + (collected ? ' collected' : '') + '" data-id="' + esc(r.id) + '">' +
+        '<div class="top">' +
+          '<div><span class="who">' + esc(r.customer || 'Customer') + '</span>' +
+            (r.phone ? '<a class="phone" href="tel:' + esc(phoneDigits) + '">📞 ' + esc(r.phone) + '</a>' : '') +
+          '</div>' +
+          '<span class="status ' + (collected ? 'collected' : 'new') + '">' + (collected ? 'Collected' : 'New') + '</span>' +
+        '</div>' +
+        '<span class="when">' + esc(timeAgo(r.createdAt)) + '</span>' +
+        '<ul class="items">' + itemsHtml + '</ul>' +
+        '<div class="tot"><span>Estimated total</span><span>' + esc(r.totalText || '—') + '</span></div>' +
+        (r.note ? '<div class="note"><b>Note:</b> ' + esc(r.note) + '</div>' : '') +
+        '<div class="acts">' +
+          (collected
+            ? '<button type="button" class="undo" data-act="new">↩ Mark as new</button>'
+            : '<button type="button" class="done" data-act="collected">✓ Mark collected</button>') +
+          '<button type="button" class="del" data-act="delete" aria-label="Delete reservation">🗑</button>' +
+        '</div>' +
+      '</article>';
+  }
+
+  function renderReservations(rows) {
+    var grid = document.getElementById('ts-res-grid');
+    var status = document.getElementById('ts-res-status');
+    var badge = document.getElementById('ts-res-badge');
+    var newCount = rows.filter(function (r) { return r.status !== 'collected'; }).length;
+    badge.textContent = String(newCount);
+
+    if (!rows.length) {
+      status.textContent = 'No reservations yet. When a customer reserves gear from the site, it appears here instantly.';
+      grid.innerHTML = '<div class="ts-empty">Nothing reserved yet.</div>';
+      return;
+    }
+    status.textContent = rows.length + ' reservation(s) · ' + newCount + ' awaiting pickup.';
+    grid.innerHTML = rows.map(resCard).join('');
+
+    grid.querySelectorAll('.ts-res').forEach(function (cardEl) {
+      var id = cardEl.getAttribute('data-id');
+      cardEl.querySelectorAll('[data-act]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var act = b.getAttribute('data-act');
+          if (act === 'delete') {
+            if (!confirm('Delete this reservation permanently?')) return;
+            b.disabled = true;
+            TSStore.deleteReservation(id).then(refreshReservations).catch(function () { b.disabled = false; alert('Delete failed — try again.'); });
+          } else {
+            b.disabled = true;
+            TSStore.setReservationStatus(id, act).then(refreshReservations).catch(function () { b.disabled = false; alert('Update failed — try again.'); });
+          }
+        });
+      });
+    });
+  }
+
+  function refreshReservations() {
+    return TSStore.fetchReservations().then(renderReservations).catch(function () {});
+  }
+  function startReservations() {
+    if (!window.TSStore) { document.getElementById('ts-res-status').textContent = 'Reservation service unavailable (store.js failed to load).'; return; }
+    TSStore.subscribeReservations(renderReservations);
+  }
+
+  /* ---------------- products & changes (section) ---------------- */
   var CAT_LABELS = { cricket: 'Cricket', training: 'Strength & Training', racquet: 'Racquet', apparel: 'Apparel' };
+  var FALLBACK = [{ cat: 'cricket', name: 'SG Savage Xtreme — English Willow', spec: 'Grade 1 willow · Short handle', price: '₹18,499', img: 'images/product-bat-sg.jpg' }];
 
-  // Fallback catalog (used only if the live scrape fails)
-  var FALLBACK = [
-    { cat: 'cricket', name: 'SG Savage Xtreme — English Willow', spec: 'Grade 1 willow · Short handle', price: '₹18,499', img: 'images/product-bat-sg.jpg' }
-  ];
-
-  // Scrape the current products straight from the live Products page (same origin)
   function loadCatalog() {
     return fetch('Products.dc.html', { cache: 'no-store' })
       .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
@@ -160,23 +351,31 @@
       });
   }
 
-  var statusEl = document.getElementById('ts-status');
-  var gridEl = document.getElementById('ts-grid');
-
-  loadCatalog().then(function (arr) {
-    statusEl.textContent = arr.length + ' products currently live on the site. Click Edit on any product to request a change.';
-    render(arr);
-  }).catch(function (e) {
-    statusEl.textContent = 'Could not scrape live products (' + e.message + ') — showing a fallback list. You can still request changes.';
-    render(FALLBACK);
-  });
-
-  function render(items) {
-    gridEl.innerHTML = '';
-    items.forEach(function (p, i) { gridEl.appendChild(card(p, i)); });
+  var gridEl, statusEl;
+  function startProducts() {
+    gridEl = document.getElementById('ts-grid');
+    statusEl = document.getElementById('ts-status');
+    loadCatalog().then(function (arr) {
+      statusEl.textContent = arr.length + ' products currently live on the site. Click Edit on any product to request a change.';
+      renderProducts(arr);
+    }).catch(function (e) {
+      statusEl.textContent = 'Could not scrape live products (' + e.message + ') — showing a fallback list.';
+      renderProducts(FALLBACK);
+    });
+    document.getElementById('ts-add-new').addEventListener('click', function () {
+      var blank = { cat: 'cricket', name: '', spec: '', price: '', img: '' };
+      var el = card(blank);
+      el.querySelector('h3').textContent = 'New product';
+      el.querySelector('.editbtn').remove();
+      gridEl.insertBefore(el, gridEl.firstChild);
+      openForm(el, blank, true);
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' });
+    });
   }
 
-  function card(p, i) {
+  function renderProducts(items) { gridEl.innerHTML = ''; items.forEach(function (p) { gridEl.appendChild(card(p)); }); }
+
+  function card(p) {
     var el = document.createElement('article');
     el.className = 'ts-card';
     el.innerHTML =
@@ -199,7 +398,6 @@
   }
 
   function openForm(cardEl, p, isNew) {
-    // Prevent duplicate forms
     if (cardEl.querySelector('.ts-form')) return;
     var editBtn = cardEl.querySelector('.editbtn');
     if (editBtn) editBtn.disabled = true;
@@ -229,28 +427,20 @@
     function get(n) { var f = form.querySelector('[name="' + n + '"]'); return f ? f.value.trim() : ''; }
     function showMsg(text, cls) { msg.style.display = 'block'; msg.className = 'msg ' + cls; msg.textContent = text; }
 
-    form.querySelector('.cancel').addEventListener('click', function () {
-      form.remove(); if (editBtn) editBtn.disabled = false;
-    });
+    form.querySelector('.cancel').addEventListener('click', function () { form.remove(); if (editBtn) editBtn.disabled = false; });
 
     form.querySelector('.save').addEventListener('click', function () {
       var updated = { name: get('name'), cat: get('cat'), spec: get('spec'), price: get('price'), img: get('img') };
       if (!updated.name) { showMsg('Please give the product a name.', 'err'); return; }
       var changes = isNew ? [] : diff(p, updated);
       if (!isNew && !changes.length && !get('notes')) { showMsg('Nothing changed yet — edit a field first.', 'err'); return; }
-      submit({
-        type: isNew ? 'ADD PRODUCT' : 'EDIT PRODUCT',
-        original: isNew ? null : p,
-        updated: updated,
-        changes: changes,
-        notes: get('notes')
-      }, this, msg, showMsg);
+      submitChange({ type: isNew ? 'ADD PRODUCT' : 'EDIT PRODUCT', original: isNew ? null : p, updated: updated, changes: changes, notes: get('notes') }, this, msg, showMsg);
     });
 
     var rm = form.querySelector('.remove');
     if (rm) rm.addEventListener('click', function () {
       if (!confirm('Request removal of "' + p.name + '" from the site?')) return;
-      submit({ type: 'REMOVE PRODUCT', original: p, updated: null, changes: [], notes: get('notes') }, this, msg, showMsg);
+      submitChange({ type: 'REMOVE PRODUCT', original: p, updated: null, changes: [], notes: get('notes') }, this, msg, showMsg);
     });
   }
 
@@ -262,82 +452,35 @@
     return out;
   }
 
-  function submit(payload, btn, msg, showMsg) {
-    var requester = (document.getElementById('ts-req-name').value || '').trim() || 'Anonymous';
+  function submitChange(payload, btn, msg, showMsg) {
+    var requester = (document.getElementById('ts-req-name').value || '').trim() || 'Store admin';
     btn.disabled = true; var old = btn.textContent; btn.textContent = 'Sending…';
 
-    var lines = [];
-    lines.push('Change type: ' + payload.type);
-    lines.push('Requested by: ' + requester);
-    lines.push('');
-    if (payload.original) {
-      lines.push('CURRENT (live now):');
-      lines.push('  Name:  ' + payload.original.name);
-      lines.push('  Cat:   ' + (payload.original.cat || '—'));
-      lines.push('  Spec:  ' + (payload.original.spec || '—'));
-      lines.push('  Price: ' + (payload.original.price || '—'));
-      lines.push('  Image: ' + (payload.original.img || '—'));
-      lines.push('');
-    }
-    if (payload.updated) {
-      lines.push('REQUESTED:');
-      lines.push('  Name:  ' + payload.updated.name);
-      lines.push('  Cat:   ' + (payload.updated.cat || '—'));
-      lines.push('  Spec:  ' + (payload.updated.spec || '—'));
-      lines.push('  Price: ' + (payload.updated.price || '—'));
-      lines.push('  Image: ' + (payload.updated.img || '—'));
-      lines.push('');
-    }
-    if (payload.changes && payload.changes.length) {
-      lines.push('WHAT CHANGED:');
-      payload.changes.forEach(function (c) { lines.push('  • ' + c); });
-      lines.push('');
-    }
-    if (payload.notes) { lines.push('Notes: ' + payload.notes); lines.push(''); }
+    var lines = ['Change type: ' + payload.type, 'Requested by: ' + requester, ''];
+    if (payload.original) { lines.push('CURRENT (live now):', '  Name:  ' + payload.original.name, '  Cat:   ' + (payload.original.cat || '—'), '  Spec:  ' + (payload.original.spec || '—'), '  Price: ' + (payload.original.price || '—'), '  Image: ' + (payload.original.img || '—'), ''); }
+    if (payload.updated) { lines.push('REQUESTED:', '  Name:  ' + payload.updated.name, '  Cat:   ' + (payload.updated.cat || '—'), '  Spec:  ' + (payload.updated.spec || '—'), '  Price: ' + (payload.updated.price || '—'), '  Image: ' + (payload.updated.img || '—'), ''); }
+    if (payload.changes && payload.changes.length) { lines.push('WHAT CHANGED:'); payload.changes.forEach(function (c) { lines.push('  • ' + c); }); lines.push(''); }
+    if (payload.notes) { lines.push('Notes: ' + payload.notes, ''); }
 
     var subjectName = (payload.updated || payload.original || {}).name || '';
-    var body = {
-      _subject: '[Translate Sports] Change requested: ' + payload.type + ' — ' + subjectName,
-      _template: 'box',
-      requested_by: requester,
-      change_type: payload.type,
-      product: subjectName,
-      details: lines.join('\n')
-    };
+    var body = { _subject: '[Translate Sports] Change requested: ' + payload.type + ' — ' + subjectName, _template: 'box', requested_by: requester, change_type: payload.type, product: subjectName, details: lines.join('\n') };
 
-    fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(body)
-    }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+    fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (res) {
         if (res.ok && (res.j.success === true || res.j.success === 'true')) {
           showMsg('✓ Change request emailed to the owner. They\'ll apply it to the live site.', 'ok');
           var row = btn.closest('.row'); if (row) row.style.display = 'none';
-        } else {
-          fallbackMailto(body, showMsg);
-        }
+        } else { fallbackMailto(body, showMsg); }
       }).catch(function () { fallbackMailto(body, showMsg); })
       .then(function () { btn.disabled = false; btn.textContent = old; });
   }
 
-  // If the email service isn't set up yet, fall back to opening the user's mail app
   function fallbackMailto(body, showMsg) {
     var href = 'mailto:' + OWNER_EMAIL + '?subject=' + encodeURIComponent(body._subject) + '&body=' + encodeURIComponent(body.details);
     showMsg('Couldn\'t auto-send (the email service may need one-time activation). Opening your mail app instead…', 'err');
     window.location.href = href;
   }
-
-  // Add new product
-  document.getElementById('ts-add-new').addEventListener('click', function () {
-    var blank = { cat: 'cricket', name: '', spec: '', price: '', img: '' };
-    var el = card(blank, -1);
-    el.querySelector('h3').textContent = 'New product';
-    el.querySelector('.editbtn').remove();
-    gridEl.insertBefore(el, gridEl.firstChild);
-    openForm(el, blank, true);
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
-  });
 })();
 </script>
 </body>
